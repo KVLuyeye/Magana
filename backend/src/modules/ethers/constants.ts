@@ -1,0 +1,154 @@
+export const ByteCode =
+  '0x608060405234801561001057600080fd5b50336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550610776806100606000396000f3fe6080604052600436106100595760003560e01c806312065fe0146100655780632e1a7d4d1461009057806338cc4831146100b95780638da5cb5b146100e4578063a9059cbb1461010f578063d0e30db01461013857610060565b3661006057005b600080fd5b34801561007157600080fd5b5061007a610142565b60405161008791906104aa565b60405180910390f35b34801561009c57600080fd5b506100b760048036038101906100b291906104f6565b61014a565b005b3480156100c557600080fd5b506100ce6102b3565b6040516100db9190610564565b60405180910390f35b3480156100f057600080fd5b506100f96102bb565b6040516101069190610564565b60405180910390f35b34801561011b57600080fd5b50610136600480360381019061013191906105ab565b6102df565b005b610140610441565b005b600047905090565b60008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16146101d8576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004016101cf90610648565b60405180910390fd5b8047101561021b576040517f08c379a0000000000000000000000000000000000000000000000000000000008152600401610212906106b4565b60405180910390fd5b3373ffffffffffffffffffffffffffffffffffffffff166108fc829081150290604051600060405180830381858888f19350505050158015610261573d6000803e3d6000fd5b503373ffffffffffffffffffffffffffffffffffffffff167f7fcf532c15f0a6db0bd6d0e038bea71d30d808c7d98cb3bf7268a95bf5081b65826040516102a891906104aa565b60405180910390a250565b600030905090565b60008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b600073ffffffffffffffffffffffffffffffffffffffff168273ffffffffffffffffffffffffffffffffffffffff160361034e576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040161034590610720565b60405180910390fd5b80471015610391576040517f08c379a0000000000000000000000000000000000000000000000000000000008152600401610388906106b4565b60405180910390fd5b8173ffffffffffffffffffffffffffffffffffffffff166108fc829081150290604051600060405180830381858888f193505050501580156103d7573d6000803e3d6000fd5b508173ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff167fddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef8360405161043591906104aa565b60405180910390a35050565b3373ffffffffffffffffffffffffffffffffffffffff167fe1fffcc4923d04b559f4d29a8bfc6cda04eb5b0d3c460751c2402c5c5cc9109c3460405161048791906104aa565b60405180910390a2565b6000819050919050565b6104a481610491565b82525050565b60006020820190506104bf600083018461049b565b92915050565b600080fd5b6104d381610491565b81146104de57600080fd5b50565b6000813590506104f0816104ca565b92915050565b60006020828403121561050c5761050b6104c5565b5b600061051a848285016104e1565b91505092915050565b600073ffffffffffffffffffffffffffffffffffffffff82169050919050565b600061054e82610523565b9050919050565b61055e81610543565b82525050565b60006020820190506105796000830184610555565b92915050565b61058881610543565b811461059357600080fd5b50565b6000813590506105a58161057f565b92915050565b600080604083850312156105c2576105c16104c5565b5b60006105d085828601610596565b92505060206105e1858286016104e1565b9150509250929050565b600082825260208201905092915050565b7f4f6e6c7920746865206f776e65722063616e2077697468647261770000000000600082015250565b6000610632601b836105eb565b915061063d826105fc565b602082019050919050565b6000602082019050818103600083015261066181610625565b9050919050565b7f496e73756666696369656e742062616c616e6365000000000000000000000000600082015250565b600061069e6014836105eb565b91506106a982610668565b602082019050919050565b600060208201905081810360008301526106cd81610691565b9050919050565b7f496e76616c696420726563697069656e74206164647265737300000000000000600082015250565b600061070a6019836105eb565b9150610715826106d4565b602082019050919050565b60006020820190508181036000830152610739816106fd565b905091905056fea264697066735822122048d9e0799b68e0ada86d6bcb4d4c4a9b6d5651407b3c178adfe1265520964f3664736f6c63430008120033';
+
+export const ABI = [
+  {
+    inputs: [],
+    stateMutability: 'nonpayable',
+    type: 'constructor',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'sender',
+        type: 'address',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'amount',
+        type: 'uint256',
+      },
+    ],
+    name: 'Deposit',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'sender',
+        type: 'address',
+      },
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'recipient',
+        type: 'address',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'amount',
+        type: 'uint256',
+      },
+    ],
+    name: 'Transfer',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'recipient',
+        type: 'address',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'amount',
+        type: 'uint256',
+      },
+    ],
+    name: 'Withdrawal',
+    type: 'event',
+  },
+  {
+    inputs: [],
+    name: 'deposit',
+    outputs: [],
+    stateMutability: 'payable',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'getAddress',
+    outputs: [
+      {
+        internalType: 'address',
+        name: '',
+        type: 'address',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'getBalance',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'owner',
+    outputs: [
+      {
+        internalType: 'address',
+        name: '',
+        type: 'address',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'recipient',
+        type: 'address',
+      },
+      {
+        internalType: 'uint256',
+        name: 'amount',
+        type: 'uint256',
+      },
+    ],
+    name: 'transfer',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'uint256',
+        name: 'amount',
+        type: 'uint256',
+      },
+    ],
+    name: 'withdraw',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    stateMutability: 'payable',
+    type: 'receive',
+  },
+];

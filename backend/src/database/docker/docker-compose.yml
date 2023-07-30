@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:latest
+    restart: always
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_DB=MAGANA_DB # Replace with your desired database name
+      - POSTGRES_PASSWORD=root12345 # Set the desired password for the PostgreSQL user
+    volumes:
+      - postgres:/var/lib/postgresql/data # PostgreSQL data volume
+    ports:
+      - '5432:5432' # Map host port to container port
+
+volumes:
+  postgres:

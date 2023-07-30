@@ -1,0 +1,31 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+
+//  Indicates that you want to generate Prisma Client, a type-safe query builder for your database. It is used to send queries to your database
+generator client {
+  provider = "prisma-client-js"
+}
+
+//Specifies your database connection
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  ID Int @id @default(autoincrement())
+  SCA_ID String @unique
+  Firstname String
+  Lastname String 
+  PIN String
+  Tel BigInt @unique
+  Role Role @default(USER)
+  joined DateTime @default(now()) 
+
+}
+
+enum Role {
+  USER 
+  ADMIN
+}
