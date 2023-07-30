@@ -55,7 +55,7 @@ onMounted(() => {
       class="mb-24 flex w-full flex-col text-center text-xl leading-relaxed tracking-wider text-[#21452A]"
     >
       Log in
-      <span class="text-sm text-gray-500"> SCA ID: [SCA_ID] </span>
+      <span class="text-sm text-gray-500"> SCA ID: <slot /> </span>
     </header>
 
     <input

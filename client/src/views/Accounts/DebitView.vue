@@ -4,6 +4,8 @@ import NestedHeader from "@/components/Header/NestedHeader.vue";
 import TransactionTable from "@/components/Graphs/TransactionTable.vue";
 import EmptyDivContainer from "@/components/Containers/EmptyDivContainer.vue";
 import { ref } from "vue";
+import { useProfile } from "@/stores/profile";
+let profile = useProfile();
 
 document.title = "Debit";
 let tab = ref("Today");
@@ -12,12 +14,11 @@ let tab = ref("Today");
 <template>
   <BaseLayout>
     <template #header>
-      <NestedHeader section-name="Debit" />
+      <NestedHeader :section-name="profile.SCA_ID" />
     </template>
 
     <template #main>
-      <q-card class="ml-4 mr-4">
-        <div class="text-h6 pl-[16px]">[SCA_ID]</div>
+      <q-card class="ml-4 mr-4 h-14">
         <q-card-section> [BALANCE] </q-card-section>
       </q-card>
       <EmptyDivContainer />

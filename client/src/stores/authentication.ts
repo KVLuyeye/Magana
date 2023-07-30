@@ -1,7 +1,6 @@
 import { defineStore } from "pinia";
 import { ref, reactive } from "vue";
 import { useRouter } from "vue-router";
-import { useProfile } from "./profile";
 import { useRoutingStore } from "@/stores/routing";
 
 export const useAuthenticationStore = defineStore("authentication", () => {
@@ -20,7 +19,6 @@ export const useAuthenticationStore = defineStore("authentication", () => {
   });
 
   let isResponseOkay = ref();
-  let profile = useProfile();
 
   let router = useRoutingStore();
 
@@ -95,9 +93,9 @@ export const useAuthenticationStore = defineStore("authentication", () => {
         console.log("Logged in successfully");
         const responseData = await response.json();
         const accessToken = responseData.access_token;
-        console.log("Access Token: ", accessToken);
-
-        profile.profileToken = accessToken;
+        const expiryTimeInSeconds = 600;
+        document.cookie = `access_token=${accessToken}; Secure; SameSite=Strict`;
+        console.log(accessToken);
 
         // Reset form values
         (loginPIN.first = null),
@@ -107,6 +105,14 @@ export const useAuthenticationStore = defineStore("authentication", () => {
           (loginPIN.fifth = null),
           (loginPIN.sixth = null),
           router.replaceRoute("home");
+      } else {
+        // Reset form values
+        (loginPIN.first = null),
+          (loginPIN.second = null),
+          (loginPIN.third = null),
+          (loginPIN.fourth = null),
+          (loginPIN.fifth = null),
+          (loginPIN.sixth = null);
       }
     } catch (error) {
       console.error("Login has failed: ", error);

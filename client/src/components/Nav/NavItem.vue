@@ -1,15 +1,20 @@
 <script lang="ts" setup>
 import { RouterLink, useRoute } from "vue-router";
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
+const { to } = defineProps(["to"]);
+const route = useRoute();
+const activeProp = computed(() => route.path === to);
 </script>
 
 <template>
-  <RouterLink
-    to=""
-    class="border border-b-2 border-l-0 border-r-0 border-t-0 border-solid focus:border-b-[#21452A] active:border-b-[#21452A]"
-  >
-    <slot />
+  <RouterLink :to="to">
+    <slot :active="activeProp" />
   </RouterLink>
 </template>
 
-<style></style>
+<style>
+.active-icon {
+  color: #21452a; /* Set your desired active color */
+  border-bottom: #21452a solid thin;
+}
+</style>

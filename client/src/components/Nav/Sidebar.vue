@@ -8,7 +8,8 @@ import ProfileIcon from "@/assets/icons/ProfileIcon.vue";
 import ForwardIcon from "@/assets/icons/ForwardIcon.vue";
 import LogoutIcon from "@/assets/icons/LogoutIcon.vue";
 import SettingsIcon from "@/assets/icons/SettingsIcon.vue";
-
+import { useProfile } from "@/stores/profile";
+let profile = useProfile();
 let sidebar = useSidebarStore();
 
 function closeSidebar() {
@@ -35,28 +36,30 @@ function closeSidebar() {
 
     <!-- Profile -->
     <RouterLink to="/profile">
-      <MenuCard @click="closeSidebar" class="ml-4 mr-4">
+      <MenuCard @click="closeSidebar" class="ml-4 mr-4 tracking-wider">
         <template #icon>
           <ProfileIcon />
         </template>
 
         <template #text1> [GET NAME]</template>
-        <template #text2> [GET IDENTIFIER] </template>
+        <template #text2>
+          {{ profile.SCA_ID }}
+        </template>
 
         <template #icon2> <ForwardIcon /> </template>
       </MenuCard>
     </RouterLink>
 
     <!-- SETTINGS-->
-    <div class="ml-4 mr-4 rounded-lg border border-solid border-gray-600">
+    <!-- <div class="ml-4 mr-4 rounded-lg border border-solid border-gray-600">
       <MenuCard
-        class="rounded-none border-b-[1px] border-l-0 border-r-0 border-t-0 pb-5 pt-5"
+        class="rounded-none border-b-[1px] border-l-0 border-r-0 border-t-0 pb-5 pt-5 tracking-wider"
       >
         <template #icon>
           <SettingsIcon />
         </template>
 
-        <template #text1> [SETTINGS]</template>
+        <template #text1> Settings</template>
 
         <template #icon2> <ForwardIcon /> </template>
       </MenuCard>
@@ -77,17 +80,20 @@ function closeSidebar() {
 
         <template #icon2> <ForwardIcon /> </template>
       </MenuCard>
-    </div>
+    </div> -->
 
+    <div>
+      <!--Invisible Positioning DIV-->
+    </div>
     <div>
       <!--Invisible Positioning DIV-->
     </div>
 
     <!-- LOGOUT-->
 
-    <RouterLink to="/signup" class="ml-4 mr-4">
-      <MenuCard>
-        <template #text1> [LOGOUT] </template>
+    <RouterLink to="/login" class="ml-4 mr-4">
+      <MenuCard class="h-[3em] tracking-widest">
+        <template #text1> Logout </template>
 
         <template #icon2>
           <LogoutIcon />

@@ -14,11 +14,7 @@ let profile = useProfile();
     </template>
 
     <template #main>
-      <p class="">
-        {{ profile.profileToken }}
-
-        {{}}
-      </p>
+      <p class=""></p>
     </template>
   </BaseLayout>
 </template>

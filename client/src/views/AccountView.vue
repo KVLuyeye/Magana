@@ -26,7 +26,6 @@ let value2 = ref(549);
     <template #main>
       <section class="flex flex-col">
         <AccountCard class="active:bg-slate-200" @click="router.goTo(debit)">
-          <template #account> Debit </template>
           <template #balance>
             <p
               class="mr-24 mt-4 h-[0.85em] animate-pulse rounded-md bg-[#eee]"

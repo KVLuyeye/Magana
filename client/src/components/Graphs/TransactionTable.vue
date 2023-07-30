@@ -12,7 +12,7 @@ let tab = ref("Today");
       <q-tabs
         v-model="tab"
         dense
-        class="text-grey overflow-x-scroll"
+        class="text-grey overflow-x-hidden"
         active-color="primary"
         indicator-color="secondary"
         narrow-indicator
