@@ -4,6 +4,7 @@
     width="1em"
     height="1em"
     viewBox="0 0 24 24"
+    :style="'font-size:' + size"
   >
     <path
       fill="currentColor"
@@ -12,8 +13,8 @@
   </svg>
 </template>
 
-<script lang="ts">
-export default {
-  name: "CloseIcon",
-};
+<script setup lang="ts">
+defineProps({
+  size: String,
+});
 </script>
