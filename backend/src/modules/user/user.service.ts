@@ -30,18 +30,27 @@ export class UserService {
   }
 
   async findUser(SCA_ID: string): Promise<User | null> {
-    return this.prisma.user.findUnique({
+    const user = await this.prisma.user.findUnique({
       where: {
         SCA_ID: SCA_ID,
       },
     });
+
+    if (user) {
+      return JSON.parse(
+        JSON.stringify(user, (key, value) =>
+          typeof value === 'bigint' ? value.toString() : value,
+        ),
+      ) as User; // Convert BigInt to string
+    }
+    return user;
   }
 
   async findAllUsers() {
     const users = await this.prisma.user.findMany();
-    return users.map((user) => ({
-      ...user,
-      tel: user.Tel.toString(), // Convert BigInt to string
-    }));
+
+    return JSON.stringify(users, (user, Tel) =>
+      typeof Tel === 'bigint' ? Tel.toString() : Tel,
+    ); // Convert BigInt to string
   }
 }

@@ -5,6 +5,7 @@
     height="1em"
     viewBox="0 0 24 24"
     class="text-3xl"
+    :style="'font-size:' + size"
   >
     <path
       fill="none"
@@ -17,8 +18,8 @@
   </svg>
 </template>
 
-<script lang="ts">
-export default {
-  name: "ProfileIcon",
-};
+<script setup lang="ts">
+defineProps({
+  size: String,
+});
 </script>

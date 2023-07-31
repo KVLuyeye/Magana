@@ -7,7 +7,7 @@ let profile = useProfile();
 <template>
   <div class="mb-4 ml-4 mr-4 flex h-24 flex-col rounded-xl p-4 shadow-xl">
     <span class="mb-2 flex items-center justify-between text-xs text-gray-600">
-      {{ profile.SCA_ID }}
+      {{ profile.SCA_ID_short }}
       <ForwardIcon />
     </span>
 

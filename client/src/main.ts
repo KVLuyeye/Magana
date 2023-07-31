@@ -9,9 +9,18 @@ import "quasar/src/css/index.sass";
 const app = createApp(App);
 const pinia = createPinia();
 
-app.use(Quasar, {
-  plugins: {},
-});
-app.use(pinia);
-app.use(router);
-app.mount("#app");
+try {
+  app.use(Quasar, {
+    plugins: {},
+  });
+  app.use(pinia);
+  app.use(router);
+  app.mount("#app");
+} catch (error) {
+  console.error("Error decoding token:", error);
+
+  alert("Please log in");
+
+  // If an error occurs (e.g., no token to decode), navigate to another route
+  router.push("/login");
+}

@@ -9,12 +9,23 @@ import ForwardIcon from "@/assets/icons/ForwardIcon.vue";
 import LogoutIcon from "@/assets/icons/LogoutIcon.vue";
 import SettingsIcon from "@/assets/icons/SettingsIcon.vue";
 import { useProfile } from "@/stores/profile";
+import { onMounted } from "vue";
 let profile = useProfile();
 let sidebar = useSidebarStore();
 
 function closeSidebar() {
   sidebar.isOpen = false;
 }
+
+function Logout() {
+  document.cookie =
+    "access_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  console.log("Logged out");
+}
+
+onMounted(() => {
+  profile.getUserInfo();
+});
 </script>
 
 <template>
@@ -41,9 +52,12 @@ function closeSidebar() {
           <ProfileIcon />
         </template>
 
-        <template #text1> [GET NAME]</template>
+        <template #text1>
+          {{ profile.userInfo.Firstname }}
+          {{ profile.userInfo.Lastname }}
+        </template>
         <template #text2>
-          {{ profile.SCA_ID }}
+          {{ profile.SCA_ID_short }}
         </template>
 
         <template #icon2> <ForwardIcon /> </template>
@@ -91,7 +105,7 @@ function closeSidebar() {
 
     <!-- LOGOUT-->
 
-    <RouterLink to="/login" class="ml-4 mr-4">
+    <RouterLink to="/login" @click="Logout" class="ml-4 mr-4">
       <MenuCard class="h-[3em] tracking-widest">
         <template #text1> Logout </template>
 

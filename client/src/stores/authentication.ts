@@ -70,7 +70,7 @@ export const useAuthenticationStore = defineStore("authentication", () => {
   async function login() {
     try {
       const data = {
-        SCA_ID: "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
+        SCA_ID: "0x5fbdb2315678afecb367f032d93f642f64180aa3",
         PIN:
           loginPIN.first +
           loginPIN.second +

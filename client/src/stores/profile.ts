@@ -4,10 +4,15 @@ import jwt_decode from "jwt-decode";
 
 export const useProfile = defineStore("profile", () => {
   let decoded_token = jwt_decode(document.cookie);
-  let SCA_ID = shortenString(decoded_token.SCA_ID);
-  let Firstname = ref("");
-  let Lastname = ref("");
-  let Tel = ref("");
+  let SCA_ID_short = shortenString(decoded_token.SCA_ID);
+  let SCA_ID = decoded_token.SCA_ID;
+
+  let userInfo = reactive({
+    Firstname: "",
+    Lastname: "",
+    Tel: "",
+    Role: "",
+  });
 
   function shortenString(str) {
     if (str.length <= 7) {
@@ -21,27 +26,28 @@ export const useProfile = defineStore("profile", () => {
 
   async function getUserInfo() {
     try {
-      const data = {
-        SCA_ID: SCA_ID,
-      };
-      const response = await fetch("http://127.0.0.1:3000/users/findUser", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      const response = await fetch(
+        `http://127.0.0.1:3000/users/findUser?SCA_ID=${SCA_ID}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       if (response.ok) {
-        Firstname.value = response.user.FirstName;
-        Lastname.value = response.user.LastName;
-        Tel.value = response.user.Tel;
+        const user = await response.json();
+
+        userInfo.Firstname = user.Firstname;
+        userInfo.Lastname = user.Lastname;
+        userInfo.Tel = user.Tel;
+        userInfo.Role = user.Role;
       }
     } catch (error) {
       console.error(error);
     }
   }
 
-  getUserInfo();
-  return { SCA_ID, shortenString, Firstname, Lastname, Tel };
+  return { SCA_ID_short, shortenString, userInfo, getUserInfo };
 });

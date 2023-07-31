@@ -40,13 +40,11 @@ export class UserController {
   @Get('findUser')
   async findUser(@Res() res: Response, @Query('SCA_ID') SCA_ID: string) {
     try {
-      const user = await this.userService.findUser(
-        '0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0',
-      );
+      const user = await this.userService.findUser(SCA_ID);
       if (user) {
-        res.json(user);
+        return res.json(user);
       } else {
-        res.status(404).json({ message: 'User not found.' });
+        return res.status(404).json({ message: 'User not found.' });
       }
     } catch (error) {
       console.error(error);

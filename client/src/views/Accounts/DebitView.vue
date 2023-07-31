@@ -14,7 +14,7 @@ let tab = ref("Today");
 <template>
   <BaseLayout>
     <template #header>
-      <NestedHeader :section-name="profile.SCA_ID" />
+      <NestedHeader :section-name="profile.SCA_ID_short" />
     </template>
 
     <template #main>
