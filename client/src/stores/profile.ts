@@ -49,5 +49,5 @@ export const useProfile = defineStore("profile", () => {
     }
   }
 
-  return { SCA_ID_short, shortenString, userInfo, getUserInfo };
+  return { SCA_ID_short, shortenString, userInfo, getUserInfo, SCA_ID };
 });

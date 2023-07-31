@@ -1,13 +1,13 @@
-import { ethers } from "hardhat";
+import { ethers } from 'hardhat';
 
 async function main() {
-  const Account = await ethers.getContractFactory("Account");
+  const Account = await ethers.getContractFactory('Account');
 
   const account = await Account.deploy();
 
   await account.deployed();
 
-  console.log(`Smart Contract Wallet deployed to: ${account.address}`);
+  console.log(`Smart Contract Account deployed to: ${account.address}`);
 
   const balance = await account.getBalance();
   console.log(`Current Balance: ${ethers.utils.formatEther(balance)}`);

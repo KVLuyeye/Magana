@@ -2,14 +2,6 @@
 import { ref } from "vue";
 
 let totalBalance = ref();
-
-async function getBalance() {
-  const response = await fetch("http://localhost:3000/wallet/balance");
-  const data = await response.json();
-  totalBalance.value = data.balance;
-}
-
-getBalance();
 </script>
 <template>
   <section

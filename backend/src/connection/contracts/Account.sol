@@ -24,16 +24,16 @@ contract Account {
 
     // Function withdraws the current amount of ETH and sends it to the EOA
     function withdraw(uint256 amount) external {
-        require(msg.sender == owner, "Only the owner can withdraw");
-        require(address(this).balance >= amount, "Insufficient balance");
+        require(msg.sender == owner, 'Only the owner can withdraw');
+        require(address(this).balance >= amount, 'Insufficient balance');
 
         payable(msg.sender).transfer(amount);
         emit Withdrawal(msg.sender, amount);
     }
 
     function transfer(address recipient, uint256 amount) external {
-        require(recipient != address(0), "Invalid recipient address");
-        require(address(this).balance >= amount, "Insufficient balance");
+        require(recipient != address(0), 'Invalid recipient address');
+        require(address(this).balance >= amount, 'Insufficient balance');
 
         payable(recipient).transfer(amount);
         emit Transfer(msg.sender, recipient, amount);
@@ -52,6 +52,6 @@ contract Account {
 
     /**
      * Currently the EOA that owns this contract calls all the functions. This obviously does not scale in terms of cost and efficiency.
-     * There should be a network of EOAs that can all execute transactions. There should be an equivalent to laod balancer that evenly distributes the requests.
+     * There should be a network of EOAs that can all execute transactions. There should be an equivalent to a laod balancer that evenly distributes the requests.
      */
 }

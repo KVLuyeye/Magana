@@ -11,6 +11,8 @@ import BaseLayout from "@/Layouts/BaseLayout.vue";
 import { onMounted, ref } from "vue";
 import SendIcon from "@/assets/icons/SendIcon.vue";
 import RequestIcon from "@/assets/icons/RequestIcon.vue";
+import EmptyDivContainer from "@/components/Containers/EmptyDivContainer.vue";
+import AccountCard from "@/components/Cards/AccountCard.vue";
 
 document.title = "Home";
 
@@ -35,8 +37,6 @@ onMounted(() => {
     </template>
 
     <template #main>
-      <BalanceCard />
-
       <OperationsCard>
         <span></span>
         <RouterLink to="/transfer/send/selectAccount">
@@ -49,8 +49,12 @@ onMounted(() => {
         </OperationsBtn>
         <span></span>
       </OperationsCard>
+      <EmptyDivContainer />
 
-      <section class="h-[15em]"></section>
+      <AccountCard />
+
+      <EmptyDivContainer />
+      <EmptyDivContainer />
     </template>
 
     <template #footer>

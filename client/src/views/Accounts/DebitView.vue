@@ -5,10 +5,14 @@ import TransactionTable from "@/components/Graphs/TransactionTable.vue";
 import EmptyDivContainer from "@/components/Containers/EmptyDivContainer.vue";
 import { ref } from "vue";
 import { useProfile } from "@/stores/profile";
+import { useAccountStore } from "@/stores/account";
+
 let profile = useProfile();
 
 document.title = "Debit";
 let tab = ref("Today");
+
+let account = useAccountStore();
 </script>
 
 <template>
@@ -19,7 +23,9 @@ let tab = ref("Today");
 
     <template #main>
       <q-card class="ml-4 mr-4 h-14">
-        <q-card-section> [BALANCE] </q-card-section>
+        <q-card-section class="text-2xl tracking-wider">
+          {{ account.info.balance }} ETH
+        </q-card-section>
       </q-card>
       <EmptyDivContainer />
       <div class="h-[10em]">
