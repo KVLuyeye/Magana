@@ -20,7 +20,7 @@ document.title = "Transactions";
     <template #main>
       <OperationsCard>
         <span></span>
-        <RouterLink to="/transfer/send/selectAccount">
+        <RouterLink to="/transfer/send/enterAmount">
           <OperationsBtn description="Send">
             <SendIcon class="text-xl" />
           </OperationsBtn>

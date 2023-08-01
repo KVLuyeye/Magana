@@ -1,13 +1,10 @@
 import { Injectable } from '@nestjs/common';
-// import { User } from './User';
 import { User } from '@prisma/client';
 import { EthersService } from 'src/modules/ethers/ethers.service';
 import { PrismaService } from 'src/modules/prisma/prisma.service';
 
 @Injectable()
 export class UserService {
-  public allUsers = [];
-
   constructor(private prisma: PrismaService, private ethers: EthersService) {}
 
   async createUser(

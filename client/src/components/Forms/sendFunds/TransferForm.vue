@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import EmptyDivContainer from "../Containers/EmptyDivContainer.vue";
+import EmptyDivContainer from "@/components/Containers/EmptyDivContainer.vue";
 import { useTransferData } from "@/stores/transactions";
 import { ref } from "vue";
 import { RouterView } from "vue-router";

@@ -1,18 +1,19 @@
 <script lang="ts" setup>
 import { useTransferData } from "@/stores/transactions";
-import MainBtn from "../Buttons/MainBtn.vue";
+import MainBtn from "@/components/Buttons/MainBtn.vue";
 
 import { useRouter } from "vue-router";
+
+let transferData = useTransferData();
 
 let router = useRouter();
 
 function replaceRoute() {
   if (transferData.address === "") {
   } else {
-    router.replace("enterAmount");
+    router.replace("confirm");
   }
 }
-let transferData = useTransferData();
 </script>
 
 <template>

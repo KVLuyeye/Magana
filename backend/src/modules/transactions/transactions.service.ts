@@ -1,27 +1,48 @@
 import { Injectable } from '@nestjs/common';
 import { EthersService } from '../ethers/ethers.service';
 import { ethers } from 'ethers';
+import { UserService } from '../user/user.service';
+import jwt_decode from 'jwt-decode';
+import { ABI, ByteCode } from '../ethers/constants';
 
 @Injectable()
 export class TransactionsService {
-  constructor(private ethersService: EthersService) {}
+  private privateKey =
+    '0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80';
 
-  async send() {
-    const contract = this.ethersService.getAccountContract(
-      '0x5FbDB2315678afecb367f032d93F642f64180aa3',
-    );
+  // ...
 
+  constructor(private ethersService: EthersService, userService: UserService) {}
+
+  async send(recipientAddress: string, amount: number) {
     try {
-      const tx = await contract.transfer(
-        '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512',
-        100,
-        { gasLimit: 200000 },
+      // Create an instance of the Wallet using the private key
+      const wallet = new ethers.Wallet(
+        this.privateKey,
+        this.ethersService.provider,
       );
-      await tx.wait(); // Wait for the transaction to be mined
-      return tx.hash; // Return the transaction hash
+
+      // Create an instance of the Smart Contract using the Wallet
+      const accountContract = new ethers.Contract(
+        '0x5fbdb2315678afecb367f032d93f642f64180aa3', // Contract address
+        ABI, // Contract ABI
+        wallet, // Use the Wallet instance to sign transactions
+      );
+
+      // Call the transfer function on the Smart Contract instance
+      const tx = await accountContract.transfer(
+        recipientAddress,
+        ethers.parseEther(amount.toString()),
+      );
+
+      // Wait for the transaction to be mined
+      await tx.wait();
+
+      // Transaction successful
+      return true;
     } catch (error) {
-      console.error('Error sending transaction:', error.message);
-      throw error; // Rethrow the error to be caught by the controller
+      console.error('Error sending funds:', error);
+      return false;
     }
   }
 }

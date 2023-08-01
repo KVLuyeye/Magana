@@ -10,12 +10,9 @@ export class TransactionsController {
 
   @Post('send') //The type of the param here should be a DTO to determine the way in which the Data from the client is being stored on the server
   async send(@Res() res: Response) {
-    try {
-      const tx = await this.transactionsService.send();
-      res.json(tx);
-    } catch (error) {
-      // Handle any errors that may occur during the transaction execution
-      res.status(500).json(error);
-    }
+    this.transactionsService.send(
+      '0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0',
+      1,
+    );
   }
 }

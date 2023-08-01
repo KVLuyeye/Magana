@@ -6,7 +6,6 @@ export const useTransferData = defineStore("transferData", () => {
   let amount = ref();
   let address = ref("");
   let isResponseOkay = ref();
-  let displayStyle = "";
 
   async function sendTransferData() {
     try {

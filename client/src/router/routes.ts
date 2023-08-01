@@ -10,9 +10,9 @@ import SendView from "@/views/SendView.vue";
 import RequestView from "@/views/RequestView.vue";
 import ProfileView from "@/views/ProfileView.vue";
 import DebitView from "@/views/Accounts/DebitView.vue";
-import SelectAccount from "@/components/Forms/SelectAccount.vue";
-import EnterAdress from "@/components/Forms/EnterAddress.vue";
-import EnterAmount from "@/components/Forms/EnterAmount.vue";
+import EnterAdress from "@/components/Forms/sendFunds/EnterAddress.vue";
+import EnterAmount from "@/components/Forms/sendFunds/EnterAmount.vue";
+import ConfirmTransfer from "@/components/Forms/sendFunds/ConfirmTransfer.vue";
 import ConfirmationBanner from "@/components/Splash/ConfirmationBanner.vue";
 
 const router = createRouter({
@@ -50,11 +50,6 @@ const router = createRouter({
       component: SendView,
       children: [
         {
-          path: "selectAccount",
-          name: "selectAccount",
-          component: SelectAccount,
-        },
-        {
           path: "enterAddress",
           name: "enterAddress",
           component: EnterAdress,
@@ -64,6 +59,13 @@ const router = createRouter({
           name: "enterAmount",
           component: EnterAmount,
         },
+
+        {
+          path: "confirm",
+          name: "confirm",
+          component: ConfirmTransfer,
+        },
+
         {
           path: "success",
           name: "success",
