@@ -18,7 +18,7 @@ async function sendFunds() {
   console.log(`Sender balance: ${ethers.utils.formatEther(balance)} ETH`);
 
   // Amount of ETH to send
-  const amountToSend = ethers.utils.parseEther('1.000'); // 1.0 ETH
+  const amountToSend = ethers.utils.parseEther('100'); // 1.0 ETH
 
   // Check if the sender has sufficient balance to send the amount
   if (balance.lt(amountToSend)) {

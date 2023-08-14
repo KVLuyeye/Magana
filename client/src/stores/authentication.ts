@@ -4,10 +4,13 @@ import { useRouter } from "vue-router";
 import { useRoutingStore } from "@/stores/routing";
 
 export const useAuthenticationStore = defineStore("authentication", () => {
+  //VARS
   let SignUpFirstname = ref("");
   let SignUpLastname = ref("");
   let SignUpPIN = ref("");
   let SignUpTel = ref("");
+
+  let loginID = ref("");
 
   let loginPIN = reactive({
     first: null,
@@ -22,6 +25,7 @@ export const useAuthenticationStore = defineStore("authentication", () => {
 
   let router = useRoutingStore();
 
+  //FUNCTIONS
   async function signUp() {
     try {
       const data = {
@@ -69,8 +73,9 @@ export const useAuthenticationStore = defineStore("authentication", () => {
 
   async function login() {
     try {
+      //TODO: SCA_ID variable is currently still empty
       const data = {
-        SCA_ID: "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
+        SCA_ID: loginID.value,
         PIN:
           loginPIN.first +
           loginPIN.second +
@@ -80,6 +85,7 @@ export const useAuthenticationStore = defineStore("authentication", () => {
           loginPIN.sixth,
       };
 
+      console.log(data.SCA_ID);
       const response = await fetch("http://127.0.0.1:3000/auth/login", {
         method: "POST",
         headers: {
@@ -116,6 +122,7 @@ export const useAuthenticationStore = defineStore("authentication", () => {
       }
     } catch (error) {
       console.error("Login has failed: ", error);
+      console.log(loginID.value);
     }
   }
 
@@ -127,6 +134,7 @@ export const useAuthenticationStore = defineStore("authentication", () => {
     signUp,
     login,
     loginPIN,
+    loginID,
     isResponseOkay,
   };
 });
