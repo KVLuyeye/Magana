@@ -1,18 +1,14 @@
 <script setup lang="ts">
-import EmptyDivContainer from "@/components/Containers/EmptyDivContainer.vue";
-import { useTransferData } from "@/stores/transactions";
-import { ref } from "vue";
-import { RouterView } from "vue-router";
+import EmptyDivContainer from '@/components/Containers/EmptyDivContainer.vue';
+import { useTransfer } from '@/stores/transactions';
+import { ref } from 'vue';
+import { RouterView } from 'vue-router';
 
-let transferData = useTransferData();
+let transfer = useTransfer();
 </script>
 
 <template>
-  <form
-    @submit.prevent
-    @submit="transferData.sendTransferData"
-    class="ml-2 mr-2 flex h-[40em] flex-col items-center justify-start p-3"
-  >
+  <section class="ml-2 mr-2 flex h-[40em] flex-col items-center justify-start p-3">
     <EmptyDivContainer />
 
     <Transition name="slide-left">
@@ -20,7 +16,7 @@ let transferData = useTransferData();
     </Transition>
 
     <EmptyDivContainer />
-  </form>
+  </section>
 </template>
 
 <style scoped>

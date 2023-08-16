@@ -14,15 +14,32 @@ datasource db {
 }
 
 model User {
-  ID Int @id @default(autoincrement())
-  SCA_ID String @unique
+  ID        Int       @id @default(autoincrement())
+  SCA_ID    String    @unique
   Firstname String
-  Lastname String 
-  PIN String
-  Tel BigInt @unique
-  Role Role @default(USER)
-  joined DateTime @default(now()) 
+  Lastname  String 
+  PIN       String
+  Tel       BigInt    @unique
+  Role      Role      @default(USER)
+  joined    DateTime  @default(now())
+  Account   Account?
+  Transactions Transactions[] // Add this field to associate transactions with a user
+}
 
+model Account {
+  SCA_ID String  @id @unique
+  User   User?   @relation(fields: [SCA_ID], references: [SCA_ID])
+}
+
+
+model Transactions {
+  TransactionHash String @id
+  From    String
+  To      String
+  Amount  Int
+  SCA_ID  String @unique
+  User    User  @relation(fields: [SCA_ID], references: [SCA_ID])
+  executed DateTime @default(now())
 }
 
 enum Role {

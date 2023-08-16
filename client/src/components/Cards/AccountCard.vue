@@ -1,17 +1,24 @@
 <script setup lang="ts">
-import ForwardIcon from "@/assets/icons/ForwardIcon.vue";
-import { useAccountStore } from "@/stores/account";
-import { useProfile } from "@/stores/profile";
-import { useRoutingStore } from "@/stores/routing";
-import { onMounted } from "vue";
+import ForwardIcon from '@/assets/icons/ForwardIcon.vue';
+import { useAccountStore } from '@/stores/account';
+import { useProfile } from '@/stores/profile';
+import { useRoutingStore } from '@/stores/routing';
+import { watch } from 'vue';
+import { computed, onMounted } from 'vue';
 
 let profile = useProfile();
 let router = useRoutingStore();
-let debit = "accounts/debit";
+let debit = 'accounts/debit';
 
 let account = useAccountStore();
 
 onMounted(() => {
+  account.getBalance();
+});
+
+let balance = computed(() => account.info.balance);
+
+watch(balance, (balance) => {
   account.getBalance();
 });
 </script>
@@ -26,6 +33,6 @@ onMounted(() => {
       <ForwardIcon />
     </span>
 
-    <span class="text-xl"> {{ account.info.balance }} ETH </span>
+    <span class="text-xl"> {{ balance }} ETH </span>
   </div>
 </template>

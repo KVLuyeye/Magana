@@ -14,7 +14,7 @@ export class TransactionsService {
 
   constructor(private ethersService: EthersService, userService: UserService) {}
 
-  async send(recipientAddress: string, amount: number) {
+  async send(senderAddress: string, recipientAddress: string, amount: number) {
     try {
       // Create an instance of the Wallet using the private key
       const wallet = new ethers.Wallet(
@@ -24,7 +24,7 @@ export class TransactionsService {
 
       // Create an instance of the Smart Contract using the Wallet
       const accountContract = new ethers.Contract(
-        '0x5fbdb2315678afecb367f032d93f642f64180aa3', // Contract address
+        senderAddress, // Contract address
         ABI, // Contract ABI
         wallet, // Use the Wallet instance to sign transactions
       );

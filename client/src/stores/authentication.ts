@@ -73,7 +73,6 @@ export const useAuthenticationStore = defineStore("authentication", () => {
 
   async function login() {
     try {
-      //TODO: SCA_ID variable is currently still empty
       const data = {
         SCA_ID: loginID.value,
         PIN:
@@ -101,7 +100,6 @@ export const useAuthenticationStore = defineStore("authentication", () => {
         const accessToken = responseData.access_token;
         const expiryTimeInSeconds = 600;
         document.cookie = `access_token=${accessToken}; Secure; SameSite=Strict`;
-        console.log(accessToken);
 
         // Reset form values
         (loginPIN.first = null),

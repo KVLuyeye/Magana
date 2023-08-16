@@ -1,16 +1,16 @@
 <script lang="ts" setup>
-import { useTransferData } from "@/stores/transactions";
+import { useTransfer } from "@/stores/transactions";
 import { useRouter } from "vue-router";
 import MainBtn from "@/components/Buttons/MainBtn.vue";
 import ForwardIcon from "@/assets/icons/ForwardIcon.vue";
 import CheckIcon from "@/assets/icons/CheckIcon.vue";
 import CloseIcon from "@/assets/icons/CloseIcon.vue";
 
-let transferData = useTransferData();
+let transfer = useTransfer();
 let router = useRouter();
 
 function replaceRoute() {
-  if (transferData.amount === "") {
+  if (transfer.amount === "") {
   } else {
     router.replace("enterAddress");
   }
@@ -21,7 +21,7 @@ function replaceRoute() {
   <div class="mt-6 rounded-lg border border-solid p-4 text-center shadow-lg">
     <label class="text-sm text-gray-500"> Enter Amount </label> <br />
     <input
-      v-model="transferData.amount"
+      v-model="transfer.amount"
       required
       step=".01"
       type="number"

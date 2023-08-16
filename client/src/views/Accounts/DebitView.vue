@@ -1,18 +1,19 @@
 <script setup lang="ts">
-import BaseLayout from "@/Layouts/BaseLayout.vue";
-import NestedHeader from "@/components/Header/NestedHeader.vue";
-import TransactionTable from "@/components/Graphs/TransactionTable.vue";
-import EmptyDivContainer from "@/components/Containers/EmptyDivContainer.vue";
-import { ref } from "vue";
-import { useProfile } from "@/stores/profile";
-import { useAccountStore } from "@/stores/account";
+import BaseLayout from '@/Layouts/BaseLayout.vue';
+import NestedHeader from '@/components/Header/NestedHeader.vue';
+import TransactionTable from '@/components/Graphs/TransactionTable.vue';
+import EmptyDivContainer from '@/components/Containers/EmptyDivContainer.vue';
+import { ref, computed } from 'vue';
+import { useProfile } from '@/stores/profile';
+import { useAccountStore } from '@/stores/account';
 
 let profile = useProfile();
 
-document.title = "Debit";
-let tab = ref("Today");
+document.title = 'Debit';
+let tab = ref('Today');
 
 let account = useAccountStore();
+let balance = computed(() => account.info.balance);
 </script>
 
 <template>
@@ -22,9 +23,10 @@ let account = useAccountStore();
     </template>
 
     <template #main>
-      <q-card class="ml-4 mr-4 h-14">
+      <q-card class="ml-4 mr-4 h-24">
         <q-card-section class="text-2xl tracking-wider">
-          {{ account.info.balance }} ETH
+          <span class="text-xs text-gray-400"> Account balance</span> <br />
+          {{ balance }} ETH
         </q-card-section>
       </q-card>
       <EmptyDivContainer />

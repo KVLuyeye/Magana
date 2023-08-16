@@ -1,32 +1,49 @@
 <script setup lang="ts">
-import { useRouter } from "vue-router";
-import { useTransferData } from "@/stores/transactions";
-import CloseIcon from "@/assets/icons/CloseIcon.vue";
-import ForwardIcon from "@/assets/icons/ForwardIcon.vue";
-import CheckIcon from "@/assets/icons/CheckIcon.vue";
+import { useRouter } from 'vue-router';
+import { useTransfer } from '@/stores/transactions';
+import { useProfile } from '@/stores/profile';
+import CloseIcon from '@/assets/icons/CloseIcon.vue';
+import ForwardIcon from '@/assets/icons/ForwardIcon.vue';
+import CheckIcon from '@/assets/icons/CheckIcon.vue';
+import { ref } from 'vue';
 
-let transferData = useTransferData();
+let transfer = useTransfer();
+let isTransactionInProgress = ref(false);
 let router = useRouter();
+let profile = useProfile();
 
-async function replaceRoute() {
-  await transferData.sendTransferData();
+async function transferFunds() {
+  isTransactionInProgress.value = true;
+  await transfer.send();
 
-  if (transferData.isResponseOkay) {
-    router.replace("success");
+  if (transfer.isResponseOkay) {
+    router.replace('success');
     setTimeout(() => {
       router.back();
     }, 2500);
+    isTransactionInProgress.value = false;
   } else {
-    alert("Transaction has failed");
-    console.error("Transaction has failed");
+    alert('Transaction has failed');
+    console.error('Transaction has failed');
   }
 }
 </script>
 
 <template>
+  <q-card class="mb-2 mt-2 h-36 w-full p-2">
+    <div class="text-h6">Confirm transaction</div>
+    <span class="flex">
+      Address:
+      {{ profile.shortenString(transfer.address) }}
+    </span>
+    <span>
+      Amount:
+      {{ transfer.amount }}
+    </span>
+  </q-card>
   <div class="w-3/4">
     <q-slide-item
-      @left="replaceRoute"
+      @left="transferFunds"
       @right="router.back()"
       left-color="green"
       right-color="red"
@@ -43,9 +60,7 @@ async function replaceRoute() {
         </span>
       </template>
 
-      <q-item
-        class="h-2 rounded-l-none border-none bg-[#1E1E1E] p-[0.75em] text-white"
-      >
+      <q-item class="h-2 rounded-l-none border-none bg-[#1E1E1E] p-[0.75em] text-white">
         <q-item-section class="h-8 w-full">
           <span class="flex flex-row items-center justify-start text-center">
             <ForwardIcon class="ml-2 mr-8 rounded-full p-2 text-lg" />
@@ -55,4 +70,11 @@ async function replaceRoute() {
       </q-item>
     </q-slide-item>
   </div>
+
+  <section
+    class="absolute top-0 flex h-full w-full items-center justify-center bg-slate-300 opacity-70"
+    v-if="isTransactionInProgress"
+  >
+    <q-circular-progress indeterminate rounded size="50px" color="black" class="q-ma-md" />
+  </section>
 </template>

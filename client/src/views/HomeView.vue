@@ -2,7 +2,6 @@
 import NavBar from "@/components/Nav/NavBar.vue";
 import Header from "@/components/Header/MainHeader.vue";
 
-import BalanceCard from "@/components/Cards/BalanceCard.vue";
 import OperationsCard from "@/components/Cards/OperationsCard.vue";
 import OperationsBtn from "@/components/Buttons/OperationsBtn.vue";
 

@@ -7,8 +7,6 @@ import {
   Wallet,
 } from 'ethers';
 
-import AccountJson from 'src/connection/contracts/artifacts/Account.json';
-
 import { ABI, ByteCode } from './constants';
 
 @Injectable()

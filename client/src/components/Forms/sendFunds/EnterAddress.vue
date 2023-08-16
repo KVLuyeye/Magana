@@ -1,26 +1,30 @@
 <script lang="ts" setup>
-import { useTransferData } from "@/stores/transactions";
-import MainBtn from "@/components/Buttons/MainBtn.vue";
+import { useTransfer } from '@/stores/transactions';
+import MainBtn from '@/components/Buttons/MainBtn.vue';
 
-import { useRouter } from "vue-router";
+import { useRouter } from 'vue-router';
 
-let transferData = useTransferData();
+let transfer = useTransfer();
 
 let router = useRouter();
 
 function replaceRoute() {
-  if (transferData.address === "") {
+  if (transfer.address === '') {
   } else {
-    router.replace("confirm");
+    router.replace('confirm');
   }
 }
+
+setTimeout(() => {
+  console.log(transfer.address);
+}, 4000);
 </script>
 
 <template>
   <div class="mt-6 rounded-lg border border-solid p-4 text-center shadow-lg">
     <label class="text-sm text-gray-500"> Enter Address </label> <br />
     <input
-      v-model="transferData.address"
+      v-model="transfer.address"
       required
       type="text"
       name="amount"
@@ -30,4 +34,3 @@ function replaceRoute() {
     <MainBtn value="Continue" @click="replaceRoute" />
   </div>
 </template>
-@/stores/transactions
