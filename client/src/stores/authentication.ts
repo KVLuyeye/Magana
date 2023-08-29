@@ -1,16 +1,16 @@
-import { defineStore } from "pinia";
-import { ref, reactive } from "vue";
-import { useRouter } from "vue-router";
-import { useRoutingStore } from "@/stores/routing";
+import { defineStore } from 'pinia';
+import { ref, reactive } from 'vue';
+import { useRouter } from 'vue-router';
+import { useRoutingStore } from '@/stores/routing';
 
-export const useAuthenticationStore = defineStore("authentication", () => {
+export const useAuthenticationStore = defineStore('authentication', () => {
   //VARS
-  let SignUpFirstname = ref("");
-  let SignUpLastname = ref("");
-  let SignUpPIN = ref("");
-  let SignUpTel = ref("");
+  let SignUpFirstname = ref('');
+  let SignUpLastname = ref('');
+  let SignUpPIN = ref('');
+  let SignUpTel = ref('');
 
-  let loginID = ref("");
+  let loginID = ref('');
 
   let loginPIN = reactive({
     first: null,
@@ -23,7 +23,7 @@ export const useAuthenticationStore = defineStore("authentication", () => {
 
   let isResponseOkay = ref();
 
-  let router = useRoutingStore();
+  let router = useRouter();
 
   //FUNCTIONS
   async function signUp() {
@@ -35,10 +35,10 @@ export const useAuthenticationStore = defineStore("authentication", () => {
         Tel: SignUpTel.value,
       };
 
-      const response = await fetch("http://127.0.0.1:3000/users/newUser", {
-        method: "POST",
+      const response = await fetch('http://127.0.0.1:3000/users/newUser', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
       });
@@ -47,27 +47,25 @@ export const useAuthenticationStore = defineStore("authentication", () => {
 
       if (response.ok) {
         // Data sent successfully
-        console.log("Register Info sent successfully");
-        console.log("FirstName: ", SignUpFirstname.value);
-        console.log("LastName: ", SignUpLastname.value);
-        console.log("PIN: ", SignUpPIN.value);
-        console.log("Phone Number: ", SignUpTel.value);
+        console.log('Register Info sent successfully');
+        console.log('FirstName: ', SignUpFirstname.value);
+        console.log('LastName: ', SignUpLastname.value);
+        console.log('PIN: ', SignUpPIN.value);
+        console.log('Phone Number: ', SignUpTel.value);
 
         // Reset form values
-        SignUpFirstname.value = "";
-        SignUpLastname.value = "";
-        SignUpPIN.value = "";
-        SignUpTel.value = "";
+        SignUpFirstname.value = '';
+        SignUpLastname.value = '';
+        SignUpPIN.value = '';
+        SignUpTel.value = '';
 
-        router.replaceRoute("home");
+        router.replaceRoute('home');
       } else {
         // Error sending data
-        alert(
-          "There has been an issue with your signup process. Please try again. "
-        );
+        alert('There has been an issue with your signup process. Please try again. ');
       }
     } catch (error) {
-      console.error("Registration has failed", error);
+      console.error('Registration has failed', error);
     }
   }
 
@@ -75,27 +73,20 @@ export const useAuthenticationStore = defineStore("authentication", () => {
     try {
       const data = {
         SCA_ID: loginID.value,
-        PIN:
-          loginPIN.first +
-          loginPIN.second +
-          loginPIN.third +
-          loginPIN.fourth +
-          loginPIN.fifth +
-          loginPIN.sixth,
+        PIN: loginPIN.first + loginPIN.second + loginPIN.third + loginPIN.fourth + loginPIN.fifth + loginPIN.sixth,
       };
 
-      console.log(data.SCA_ID);
-      const response = await fetch("http://127.0.0.1:3000/auth/login", {
-        method: "POST",
+      const response = await fetch('http://127.0.0.1:3000/auth/login', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json; charset=utf-8",
+          'Content-Type': 'application/json; charset=utf-8',
         },
         body: JSON.stringify(data),
       });
 
       if (response.ok) {
         // Data sent successfully
-        console.log("Logged in successfully");
+        console.log('Logged in successfully');
         const responseData = await response.json();
         const accessToken = responseData.access_token;
         const expiryTimeInSeconds = 600;
@@ -108,19 +99,19 @@ export const useAuthenticationStore = defineStore("authentication", () => {
           (loginPIN.fourth = null),
           (loginPIN.fifth = null),
           (loginPIN.sixth = null),
-          router.replaceRoute("home");
-      } else {
-        // Reset form values
-        (loginPIN.first = null),
-          (loginPIN.second = null),
-          (loginPIN.third = null),
-          (loginPIN.fourth = null),
-          (loginPIN.fifth = null),
-          (loginPIN.sixth = null);
+          router.replace('home').then(() => {
+            window.location.reload();
+          });
       }
     } catch (error) {
-      console.error("Login has failed: ", error);
-      console.log(loginID.value);
+      console.error('Login has failed: ', error);
+      window.alert('Login has failed. Please try again. ' + error);
+      (loginPIN.first = null),
+        (loginPIN.second = null),
+        (loginPIN.third = null),
+        (loginPIN.fourth = null),
+        (loginPIN.fifth = null),
+        (loginPIN.sixth = null);
     }
   }
 

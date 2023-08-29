@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import BackwardsIcon from "@/assets/icons/BackwardIcon.vue";
-import { useRouter } from "vue-router";
+import BackwardsIcon from '@/assets/icons/BackwardIcon.vue';
+import { useRouter } from 'vue-router';
 
 const router = useRouter();
 const goBack = () => {
@@ -9,7 +9,7 @@ const goBack = () => {
 </script>
 
 <template>
-  <button @click="goBack">
+  <button @click="goBack" class="text-xl text-green-900">
     <BackwardsIcon />
   </button>
 </template>

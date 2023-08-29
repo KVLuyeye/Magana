@@ -1,19 +1,21 @@
 <script setup lang="ts">
 import BaseLayout from '@/Layouts/BaseLayout.vue';
 import NestedHeader from '@/components/Header/NestedHeader.vue';
-import TransactionTable from '@/components/Graphs/TransactionTable.vue';
 import EmptyDivContainer from '@/components/Containers/EmptyDivContainer.vue';
 import { ref, computed } from 'vue';
 import { useProfile } from '@/stores/profile';
 import { useAccountStore } from '@/stores/account';
-
-let profile = useProfile();
-
 document.title = 'Debit';
-let tab = ref('Today');
 
+//VARS
+let profile = useProfile();
 let account = useAccountStore();
+
+//COMPUTED
 let balance = computed(() => account.info.balance);
+
+//METHODS
+account.getTransactionsHistory();
 </script>
 
 <template>
@@ -25,60 +27,31 @@ let balance = computed(() => account.info.balance);
     <template #main>
       <q-card class="ml-4 mr-4 h-24">
         <q-card-section class="text-2xl tracking-wider">
-          <span class="text-xs text-gray-400"> Account balance</span> <br />
+          <span class="text-xs text-gray-400">Account balance</span> <br />
           {{ balance }} ETH
         </q-card-section>
       </q-card>
       <EmptyDivContainer />
-      <div class="h-[10em]">
-        <q-tabs
-          v-model="tab"
-          dense
-          class="text-grey overflow-x-scroll"
-          active-color="primary"
-          indicator-color="secondary"
-          narrow-indicator
+
+      <q-scroll-area class="ml-4 mr-4 h-[35em] rounded-lg bg-white p-4">
+        <div
+          class="ml-6 mr-6 flex h-[7em] flex-col"
+          v-for="transaction in account.transactionHistory"
+          :key="transaction.id"
         >
-          <q-tab name="Today" label="Today" />
-          <q-tab name="This Week" label="This Week" />
-          <q-tab name="This Month" label="This Month" />
-        </q-tabs>
-
-        <q-separator />
-
-        <q-tab-panels animated v-model="tab" swipeable>
-          <q-tab-panel name="Today">
-            <div class="pb-4 text-sm">
-              <h6>From [Account]</h6>
-              <span>[DATE]</span>
-              <span> [AMOUNT]</span>
+          <div class="flex flex-row items-end justify-between pb-4 text-sm">
+            <div>
+              <span class="text-md">{{ profile.shortenString(transaction.To) }}</span> <br />
+              <span class="text-xs tracking-wider">{{
+                new Date(transaction.executed).toLocaleDateString('en-GB')
+              }}</span>
+              <br />
             </div>
-
-            <q-separator />
-          </q-tab-panel>
-
-          <q-tab-panel name="This Week">
-            <div class="pb-4 text-sm">
-              <h6>From [Account]</h6>
-              <span>[DATE]</span>
-              <span> [AMOUNT]</span>
-            </div>
-            <q-separator />
-          </q-tab-panel>
-
-          <q-tab-panel name="This Month">
-            <div class="pb-4 text-sm">
-              <h6>From [Account]</h6>
-              <span>[DATE]</span>
-              <span> [AMOUNT]</span>
-            </div>
-            <q-separator />
-          </q-tab-panel>
-        </q-tab-panels>
-      </div>
-      <EmptyDivContainer />
-      <EmptyDivContainer />
-      <EmptyDivContainer />
+            <span class="text-lg"> - {{ transaction.Amount }} ETH</span>
+          </div>
+          <q-separator />
+        </div>
+      </q-scroll-area>
     </template>
   </BaseLayout>
 </template>

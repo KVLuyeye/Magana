@@ -1,11 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import {
-  ethers,
-  JsonRpcProvider,
-  Contract,
-  ContractFactory,
-  Wallet,
-} from 'ethers';
+import { ethers, JsonRpcProvider, Contract, ContractFactory, Wallet } from 'ethers';
 
 import { ABI, ByteCode } from './constants';
 
@@ -25,8 +19,7 @@ export class EthersService {
     const AccountABI = ABI;
     const AccountBytecode = ByteCode;
 
-    const privateKey =
-      '0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80';
+    const privateKey = '0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80';
     const signer = new Wallet(privateKey, this.provider);
 
     const Account = new ContractFactory(AccountABI, AccountBytecode, signer);

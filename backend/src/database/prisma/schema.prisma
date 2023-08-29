@@ -37,9 +37,9 @@ model Transactions {
   From    String
   To      String
   Amount  Int
-  SCA_ID  String @unique
-  User    User  @relation(fields: [SCA_ID], references: [SCA_ID])
+  SCA_ID  String 
   executed DateTime @default(now())
+  User    User  @relation(fields: [SCA_ID], references: [SCA_ID])
 }
 
 enum Role {

@@ -15,9 +15,9 @@ export class TransactionsController {
     @Body('amount') amount: number,
   ) {
     try {
-      // Assuming this.transactionsService.send returns a promise
       await this.transactionsService.send(senderAddress, recipientAddress, amount);
 
+      console.log('Transaction sent successfully');
       return res.status(HttpStatus.OK).json({
         message: 'Transaction sent successfully',
         senderAddress: senderAddress,

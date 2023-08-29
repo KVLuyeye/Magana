@@ -8,14 +8,10 @@ let transfer = useTransfer();
 </script>
 
 <template>
-  <section class="ml-2 mr-2 flex h-[40em] flex-col items-center justify-start p-3">
-    <EmptyDivContainer />
-
+  <section class="mb-28 ml-2 mr-2 flex h-[40em] flex-col items-center justify-start p-3">
     <Transition name="slide-left">
       <RouterView />
     </Transition>
-
-    <EmptyDivContainer />
   </section>
 </template>
 
@@ -28,6 +24,10 @@ let transfer = useTransfer();
 .slide-left-enter,
 .slide-left-leave-to {
   transform: translateX(-100%);
+}
+
+.flex {
+  flex-wrap: nowrap !important;
 }
 </style>
 @/stores/transactions

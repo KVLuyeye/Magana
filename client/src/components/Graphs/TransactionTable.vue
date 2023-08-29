@@ -1,56 +1,34 @@
 <script setup lang="ts">
-import { ref } from "vue";
-let tab = ref("Today");
+import EmptyDivContainer from '@/components/Containers/EmptyDivContainer.vue';
+import { ref, computed } from 'vue';
+import { useProfile } from '@/stores/profile';
+import { useAccountStore } from '@/stores/account';
+document.title = 'Debit';
+
+//VARS
+let profile = useProfile();
+let account = useAccountStore();
+
+//METHODS
+account.getTransactionsHistory();
 </script>
 
 <template>
-  <section class="mt-12 h-[25em] p-4">
-    <h1 class="mb-4 text-2xl font-semibold">Recent Activity</h1>
-    <div class="h-[10em]">
-      <q-tabs
-        v-model="tab"
-        dense
-        class="text-grey overflow-x-hidden"
-        active-color="primary"
-        indicator-color="secondary"
-        narrow-indicator
-      >
-        <q-tab name="Today" label="Today" />
-        <q-tab name="This Week" label="This Week" />
-        <q-tab name="This Month" label="This Month" />
-      </q-tabs>
-
+  <q-scroll-area class="ml-4 mr-4 h-[25em] rounded-lg bg-white p-4">
+    <div
+      class="ml-6 mr-6 flex h-[7em] flex-col"
+      v-for="transaction in account.transactionHistory"
+      :key="transaction.id"
+    >
+      <div class="flex flex-row items-end justify-between pb-4 text-sm">
+        <div>
+          <span class="text-md">{{ profile.shortenString(transaction.To) }}</span> <br />
+          <span class="text-xs tracking-wider">{{ new Date(transaction.executed).toLocaleDateString('en-GB') }}</span>
+          <br />
+        </div>
+        <span class="text-lg text-red-600"> - {{ transaction.Amount }} ETH</span>
+      </div>
       <q-separator />
-
-      <q-tab-panels animated v-model="tab" swipeable>
-        <q-tab-panel name="Today">
-          <div class="pb-4 text-sm">
-            <h6>From [Account]</h6>
-            <span>[DATE]</span>
-            <span> [AMOUNT]</span>
-          </div>
-
-          <q-separator />
-        </q-tab-panel>
-
-        <q-tab-panel name="This Week">
-          <div class="pb-4 text-sm">
-            <h6>From [Account]</h6>
-            <span>[DATE]</span>
-            <span> [AMOUNT]</span>
-          </div>
-          <q-separator />
-        </q-tab-panel>
-
-        <q-tab-panel name="This Month">
-          <div class="pb-4 text-sm">
-            <h6>From [Account]</h6>
-            <span>[DATE]</span>
-            <span> [AMOUNT]</span>
-          </div>
-          <q-separator />
-        </q-tab-panel>
-      </q-tab-panels>
     </div>
-  </section>
+  </q-scroll-area>
 </template>

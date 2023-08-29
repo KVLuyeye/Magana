@@ -14,23 +14,11 @@ import { AuthModule } from './modules/auth/auth.module';
 import { UserModule } from './modules/user/user.module';
 import { PrismaService } from './modules/prisma/prisma.service';
 import { PrismaModule } from './modules/prisma/prisma.module';
+import { AccountModule } from './modules/wallet/account.module';
 
 @Module({
-  imports: [AuthModule, UserModule, PrismaModule],
-  controllers: [
-    UserController,
-    AccountController,
-    TransactionsController,
-    NotificationsController,
-    AuthController,
-  ],
-  providers: [
-    EthersService,
-    AccountService,
-    TransactionsService,
-    UserService,
-    AuthService,
-    PrismaService,
-  ],
+  imports: [AuthModule, UserModule, PrismaModule, AccountModule],
+  controllers: [UserController, AccountController, TransactionsController, NotificationsController, AuthController],
+  providers: [EthersService, AccountService, TransactionsService, UserService, AuthService, PrismaService],
 })
 export class AppModule {}

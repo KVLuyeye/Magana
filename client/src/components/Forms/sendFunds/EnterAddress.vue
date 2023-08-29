@@ -14,15 +14,11 @@ function replaceRoute() {
     router.replace('confirm');
   }
 }
-
-setTimeout(() => {
-  console.log(transfer.address);
-}, 4000);
 </script>
 
 <template>
-  <div class="mt-6 rounded-lg border border-solid p-4 text-center shadow-lg">
-    <label class="text-sm text-gray-500"> Enter Address </label> <br />
+  <q-card class="mt-6 flex h-[35em] w-[95%] flex-col items-center justify-center rounded-lg p-4 text-center shadow-lg">
+    <label class="text-sm text-gray-500"> To </label> <br />
     <input
       v-model="transfer.address"
       required
@@ -32,5 +28,5 @@ setTimeout(() => {
     />
     <br />
     <MainBtn value="Continue" @click="replaceRoute" />
-  </div>
+  </q-card>
 </template>

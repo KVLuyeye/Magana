@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import NavItem from "./NavItem.vue";
-import HomeIcon from "@/assets/icons/HomeIcon.vue";
-import ExchangeIcon from "@/assets/icons/ExchangeIcon.vue";
-import AccountIcon from "@/assets/icons/AccountIcon.vue";
-import TransactionIcon from "@/assets/icons/TransactionIcon.vue";
-import { ref } from "vue";
-import { useRoute } from "vue-router";
+import NavItem from './NavItem.vue';
+import HomeIcon from '@/assets/icons/HomeIcon.vue';
+import ExchangeIcon from '@/assets/icons/ExchangeIcon.vue';
+import AccountIcon from '@/assets/icons/AccountIcon.vue';
+import TransactionIcon from '@/assets/icons/TransactionIcon.vue';
+import { ref } from 'vue';
+import { useRoute } from 'vue-router';
 const route = useRoute();
 
 // Function to check if the route is active
@@ -16,7 +16,7 @@ const isActive = (path: string) => {
 
 <template>
   <nav
-    class="flex h-[4em] flex-row items-center justify-between rounded-tl-lg rounded-tr-lg border border-b-0 border-l-0 border-r-0 border-solid border-black pl-4 pr-4"
+    class="mb-6 flex h-[4em] flex-row items-center justify-between rounded-tl-lg rounded-tr-lg border border-b-0 border-l-0 border-r-0 border-solid border-[#136207] pl-4 pr-4"
   >
     <NavItem to="/home" :active="isActive('/home')">
       <HomeIcon :class="{ 'active-icon': isActive('/home') }" />

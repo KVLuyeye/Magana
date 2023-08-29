@@ -1,17 +1,24 @@
-import { defineStore } from "pinia";
-import { ref, reactive } from "vue";
-import jwt_decode from "jwt-decode";
+import { defineStore } from 'pinia';
+import { ref, reactive } from 'vue';
+import jwt_decode from 'jwt-decode';
 
-export const useProfile = defineStore("profile", () => {
-  let decoded_token = jwt_decode(document.cookie);
+export const useProfile = defineStore('profile', () => {
+  let decoded_token = {};
+  if (document.cookie.includes('access_token')) {
+    try {
+      decoded_token = jwt_decode(document.cookie.split('access_token=')[1]);
+    } catch (error) {
+      console.error('Error decoding token:', error);
+    }
+  }
   let SCA_ID_short = shortenString(decoded_token.SCA_ID);
   let SCA_ID = decoded_token.SCA_ID;
 
   let userInfo = reactive({
-    Firstname: "",
-    Lastname: "",
-    Tel: "",
-    Role: "",
+    Firstname: '',
+    Lastname: '',
+    Tel: '',
+    Role: '',
   });
 
   function shortenString(str) {
@@ -20,21 +27,18 @@ export const useProfile = defineStore("profile", () => {
       return str;
     } else {
       // Shorten the string by taking the first two characters and the last five characters
-      return str.slice(0, 2) + "..." + str.slice(-5);
+      return str.slice(0, 2) + '...' + str.slice(-5);
     }
   }
 
   async function getUserInfo() {
     try {
-      const response = await fetch(
-        `http://127.0.0.1:3000/users/findUser?SCA_ID=${SCA_ID}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(`http://127.0.0.1:3000/users/findUser?SCA_ID=${SCA_ID}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
       if (response.ok) {
         const user = await response.json();

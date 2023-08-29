@@ -24,11 +24,8 @@ watch(balance, (balance) => {
 </script>
 
 <template>
-  <div
-    class="mb-4 ml-4 mr-4 flex h-24 flex-col rounded-xl p-4 shadow-xl active:bg-slate-200"
-    @click="router.goTo(debit)"
-  >
-    <span class="mb-2 flex items-center justify-between text-xs text-gray-600">
+  <div class="mb-4 ml-4 mr-4 flex h-24 flex-col rounded-xl p-4 shadow-xl active:scale-95" @click="router.goTo(debit)">
+    <span class="mb-2 flex items-center justify-between text-xs text-green-900">
       {{ profile.SCA_ID_short }}
       <ForwardIcon />
     </span>

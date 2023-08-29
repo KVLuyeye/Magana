@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { useAuthenticationStore } from "@/stores/authentication";
-import { reactive } from "vue";
-import { onMounted } from "vue";
+import { ref } from 'vue';
+import { useAuthenticationStore } from '@/stores/authentication';
+import { reactive } from 'vue';
+import { onMounted } from 'vue';
 let inputFirst = ref(null);
 let inputSecond = ref(null);
 let inputThird = ref(null);
@@ -51,9 +51,7 @@ onMounted(() => {
   -->
 
   <form @submit.prevent class="flex flex-row items-center justify-center p-4">
-    <header
-      class="mb-24 flex w-full flex-col text-center text-xl leading-relaxed tracking-wider text-[#21452A]"
-    >
+    <header class="mb-24 flex w-full flex-col text-center text-xl leading-relaxed tracking-wider text-[#21452A]">
       Log in
       <span class="text-sm text-gray-500"> SCA ID: <slot /> </span>
     </header>
@@ -119,6 +117,8 @@ onMounted(() => {
       v-model="auth.loginPIN.sixth"
     />
   </form>
+
+  <q-btn class="mt-8" @click="auth.login"> Login </q-btn>
 </template>
 
 <style scoped>

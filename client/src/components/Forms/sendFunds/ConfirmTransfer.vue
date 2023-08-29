@@ -23,6 +23,8 @@ async function transferFunds() {
     }, 2500);
     isTransactionInProgress.value = false;
   } else {
+    isTransactionInProgress.value = false;
+    router.back();
     alert('Transaction has failed');
     console.error('Transaction has failed');
   }
@@ -30,17 +32,21 @@ async function transferFunds() {
 </script>
 
 <template>
-  <q-card class="mb-2 mt-2 h-36 w-full p-2">
-    <div class="text-h6">Confirm transaction</div>
-    <span class="flex">
-      Address:
-      {{ profile.shortenString(transfer.address) }}
-    </span>
-    <span>
-      Amount:
-      {{ transfer.amount }}
-    </span>
+  <q-card class="mb-8 mt-2 flex h-[25em] w-full flex-col justify-center p-2 text-center">
+    <q-card-section class="flex h-full flex-col justify-around">
+      <span class="text-xl">
+        <h6 class="text-left text-sm text-gray-400">Amount:</h6>
+        {{ transfer.amount }}
+      </span>
+      <q-separator />
+      <span class="text-xl">
+        <h6 class="text-left text-sm text-gray-400">Address:</h6>
+        {{ profile.shortenString(transfer.address) }}
+      </span>
+    </q-card-section>
   </q-card>
+
+  <!-- Slider -->
   <div class="w-3/4">
     <q-slide-item
       @left="transferFunds"

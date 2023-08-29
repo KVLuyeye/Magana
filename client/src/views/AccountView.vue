@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import BaseLayout from "@/Layouts/BaseLayout.vue";
-import AccountCard from "@/components/Cards/AccountCard.vue";
-import Header from "@/components/Header/MainHeader.vue";
-import NavBar from "@/components/Nav/NavBar.vue";
-import BalanceDoughnut from "@/components/Graphs/BalanceDoughnut.vue";
-import EmptyDivContainer from "@/components/Containers/EmptyDivContainer.vue";
-import { useRoutingStore } from "@/stores/routing";
-import { ref } from "vue";
-document.title = "Accounts";
+import BaseLayout from '@/Layouts/BaseLayout.vue';
+import AccountCard from '@/components/Cards/AccountCard.vue';
+import Header from '@/components/Header/MainHeader.vue';
+import NavBar from '@/components/Nav/NavBar.vue';
+import BalanceDoughnut from '@/components/Graphs/BalanceDoughnut.vue';
+import EmptyDivContainer from '@/components/Containers/EmptyDivContainer.vue';
+import { useRoutingStore } from '@/stores/routing';
+import { ref } from 'vue';
+document.title = 'Accounts';
 
 let router = useRoutingStore();
 </script>
@@ -22,7 +22,6 @@ let router = useRoutingStore();
       <section class="flex flex-col">
         <AccountCard />
       </section>
-      <EmptyDivContainer />
       <EmptyDivContainer />
       <EmptyDivContainer />
       <EmptyDivContainer />
