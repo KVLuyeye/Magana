@@ -5,7 +5,7 @@ import { TransactionsService } from './transactions.service';
 
 @Controller('transactions')
 export class TransactionsController {
-  constructor(private transactionsService: TransactionsService) {}
+  constructor(private transactionsService: TransactionsService, private ethersService: EthersService) {}
 
   @Post('send')
   async send(
@@ -18,6 +18,11 @@ export class TransactionsController {
       await this.transactionsService.send(senderAddress, recipientAddress, amount);
 
       console.log('Transaction sent successfully');
+      console.log('Fee: ' + amount * 0.005);
+      console.log(
+        'Current balance: ' + (await this.ethersService.getBalance('0xdf9d56938117978b392a859147578fe365255323')),
+      );
+
       return res.status(HttpStatus.OK).json({
         message: 'Transaction sent successfully',
         senderAddress: senderAddress,

@@ -1,21 +1,21 @@
 import { defineStore } from 'pinia';
 import { ref, reactive } from 'vue';
-import { useProfile } from '@/stores/profile';
+import { useProfile } from '@/stores/users';
 
 export const useTransfer = defineStore('transferData', () => {
   let amount = ref();
   let address = ref('');
   let isResponseOkay = ref();
-  let profile = useProfile();
+  let user = useProfile();
 
   async function send() {
     try {
       const data = {
-        senderAddress: profile.SCA_ID,
+        senderAddress: user.SCA_ID,
         recipientAddress: address.value,
         amount: amount.value,
       };
-      const response = await fetch('https://e70a-178-199-92-184.ngrok-free.app/transactions/send', {
+      const response = await fetch('http://127.0.0.1:3000/transactions/send', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -28,7 +28,7 @@ export const useTransfer = defineStore('transferData', () => {
       if (response.ok) {
         // Data sent successfully
         console.log('Transfer data sent successfully');
-        console.log('Address: ' + address.value, ' ', 'Amount' + amount.value);
+        console.log('Address: ' + address.value, ' ', 'Amount ' + amount.value);
 
         // Reset form values
         address.value = '';

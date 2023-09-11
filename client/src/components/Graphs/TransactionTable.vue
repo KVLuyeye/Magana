@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import EmptyDivContainer from '@/components/Containers/EmptyDivContainer.vue';
 import { ref, computed } from 'vue';
-import { useProfile } from '@/stores/profile';
+import { useProfile } from '@/stores/users';
 import { useAccountStore } from '@/stores/account';
 document.title = 'Debit';
 
 //VARS
-let profile = useProfile();
+let user = useProfile();
 let account = useAccountStore();
 
 //METHODS
@@ -22,7 +22,7 @@ account.getTransactionsHistory();
     >
       <div class="flex flex-row items-end justify-between pb-4 text-sm">
         <div>
-          <span class="text-md">{{ profile.shortenString(transaction.To) }}</span> <br />
+          <span class="text-md">{{ user.shortenString(transaction.To) }}</span> <br />
           <span class="text-xs tracking-wider">{{ new Date(transaction.executed).toLocaleDateString('en-GB') }}</span>
           <br />
         </div>
@@ -32,3 +32,4 @@ account.getTransactionsHistory();
     </div>
   </q-scroll-area>
 </template>
+@/stores/users

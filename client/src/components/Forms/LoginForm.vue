@@ -53,7 +53,7 @@ onMounted(() => {
   <form @submit.prevent class="flex flex-row items-center justify-center p-4">
     <header class="mb-24 flex w-full flex-col text-center text-xl leading-relaxed tracking-wider text-[#21452A]">
       Log in
-      <span class="text-sm text-gray-500"> SCA ID: <slot /> </span>
+      <span class="text-sm text-gray-500"><slot /></span>
     </header>
 
     <input
@@ -117,8 +117,6 @@ onMounted(() => {
       v-model="auth.loginPIN.sixth"
     />
   </form>
-
-  <q-btn class="mt-8" @click="auth.login"> Login </q-btn>
 </template>
 
 <style scoped>

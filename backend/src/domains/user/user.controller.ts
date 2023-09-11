@@ -8,19 +8,14 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get('all')
-  getAllUser() {
+  findAllUser() {
     return this.userService.findAllUsers();
   }
 
   @Post('newUser')
   async createUser(@Res() res: Response, @Body() user: User) {
     try {
-      await this.userService.createUser(
-        user.Firstname,
-        user.Lastname,
-        Number(user.Tel),
-        user.PIN,
-      );
+      await this.userService.createUser(user.Firstname, user.Lastname, Number(user.Tel), user.PIN);
 
       res.json(user); // Send the user object as the response
       console.log(`
@@ -31,9 +26,7 @@ export class UserController {
       `);
     } catch (error) {
       console.error(error);
-      res
-        .status(500)
-        .json({ message: 'An error occurred while creating the user.' });
+      res.status(500).json({ message: 'An error occurred while creating the user.' });
     }
   }
 
@@ -48,9 +41,7 @@ export class UserController {
       }
     } catch (error) {
       console.error(error);
-      res
-        .status(500)
-        .json({ message: 'An error occurred while finding the user.' });
+      res.status(500).json({ message: 'An error occurred while finding the user.' });
     }
   }
 }

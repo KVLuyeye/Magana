@@ -7,10 +7,10 @@ import MenuCard from '@/components/Cards/MenuCard.vue';
 import ProfileIcon from '@/assets/icons/ProfileIcon.vue';
 import ForwardIcon from '@/assets/icons/ForwardIcon.vue';
 import LogoutIcon from '@/assets/icons/LogoutIcon.vue';
-import SettingsIcon from '@/assets/icons/SettingsIcon.vue';
-import { useProfile } from '@/stores/profile';
+import ContactsIcon from '@/assets/icons/ContactsIcon.vue';
+import { useProfile } from '@/stores/users';
 import { onMounted } from 'vue';
-let profile = useProfile();
+let user = useProfile();
 let sidebar = useSidebarStore();
 
 function closeSidebar() {
@@ -23,13 +23,13 @@ function Logout() {
 }
 
 onMounted(() => {
-  profile.getUserInfo();
+  user.getCurrentUser();
 });
 </script>
 
 <template>
   <aside
-    class="absolute left-0 top-0 z-40 grid min-h-screen w-full max-w-[820px] -translate-x-full transform grid-rows-[2.5em_4.5em_12.5em_1fr_6.5em] gap-14 bg-[#072313] duration-300 ease-in-out"
+    class="absolute left-0 top-0 z-40 grid min-h-screen w-full max-w-[820px] -translate-x-full transform grid-rows-[2.5em_4.5em_4.5em_1fr_6.5em] gap-14 bg-[#072313] duration-300 ease-in-out"
     :class="{
       'sidebar-open': sidebar.isOpen,
       'sidebar-closed': !sidebar.isOpen,
@@ -49,11 +49,11 @@ onMounted(() => {
         </template>
 
         <template #text1>
-          {{ profile.userInfo.Firstname }}
-          {{ profile.userInfo.Lastname }}
+          {{ user.current.Firstname }}
+          {{ user.current.Lastname }}
         </template>
         <template #text2>
-          {{ profile.SCA_ID_short }}
+          {{ user.SCA_ID_short }}
         </template>
 
         <template #icon2> <ForwardIcon /> </template>
@@ -61,47 +61,26 @@ onMounted(() => {
     </RouterLink>
 
     <!-- SETTINGS-->
-    <!-- <div class="ml-4 mr-4 rounded-lg border border-solid border-gray-600">
+
+    <RouterLink to="/contacts">
       <MenuCard
-        class="rounded-none border-b-[1px] border-l-0 border-r-0 border-t-0 pb-5 pt-5 tracking-wider"
+        @click="closeSidebar"
+        class="ml-4 mr-4 rounded-lg border border-b-[1px] border-solid border-white tracking-wider text-white"
       >
         <template #icon>
-          <SettingsIcon />
+          <ContactsIcon />
         </template>
 
-        <template #text1> Settings</template>
-
-        <template #icon2> <ForwardIcon /> </template>
+        <template #text1> Contacts </template>
       </MenuCard>
-
-      <MenuCard
-        class="rounded-none border-b-[1px] border-l-0 border-r-0 border-t-0 pb-5 pt-5"
-      >
-        <template #icon> </template>
-
-        <template #text1> [X]</template>
-
-        <template #icon2> <ForwardIcon /> </template>
-      </MenuCard>
-      <MenuCard class="rounded-none border-none pb-5 pt-5">
-        <template #icon> </template>
-
-        <template #text1> [Y]</template>
-
-        <template #icon2> <ForwardIcon /> </template>
-      </MenuCard>
-    </div> -->
-
-    <div>
-      <!--Invisible Positioning DIV-->
-    </div>
+    </RouterLink>
     <div>
       <!--Invisible Positioning DIV-->
     </div>
 
     <!-- LOGOUT-->
 
-    <RouterLink to="/login" @click="Logout" class="ml-4 mr-4">
+    <RouterLink to="/welcome" @click="Logout" class="ml-4 mr-4">
       <MenuCard class="h-[3em] tracking-widest">
         <template #text1> Logout </template>
 
@@ -122,3 +101,4 @@ onMounted(() => {
   transform: translateX(-100%);
 }
 </style>
+@/stores/users

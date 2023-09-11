@@ -1,11 +1,12 @@
-import "./assets/main.css";
+import './assets/main.css';
 
-import { createApp } from "vue";
-import { createPinia } from "pinia";
-import { Quasar } from "quasar";
-import App from "./App.vue";
-import router from "./router/routes";
-import "quasar/src/css/index.sass";
+import { createApp } from 'vue';
+import { createPinia } from 'pinia';
+import { Quasar } from 'quasar';
+import App from './App.vue';
+import router from './router/routes';
+import 'quasar/src/css/index.sass';
+import '@quasar/extras/material-icons/material-icons.css';
 const app = createApp(App);
 const pinia = createPinia();
 
@@ -15,12 +16,12 @@ try {
   });
   app.use(pinia);
   app.use(router);
-  app.mount("#app");
+  app.mount('#app');
 } catch (error) {
-  console.error("Error decoding token:", error);
+  console.error('Error decoding token:', error);
 
-  alert("Please log in");
+  alert('Please log in');
 
   // If an error occurs (e.g., no token to decode), navigate to another route
-  router.push("/login");
+  router.push('/login');
 }

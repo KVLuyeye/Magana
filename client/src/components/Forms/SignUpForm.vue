@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { useAuthenticationStore } from "@/stores/authentication";
+import SubmitBtn from '@/components/Buttons/SubmitBtn.vue';
+import { useAuthenticationStore } from '@/stores/authentication';
 
 let auth = useAuthenticationStore();
 </script>
@@ -7,10 +8,7 @@ let auth = useAuthenticationStore();
 <template>
   <div>
     <header class="mb-4 w-full pl-4 text-left text-2xl">SignUp</header>
-    <form
-      @submit.prevent
-      class="m-6 flex flex-col rounded-lg border border-solid border-gray-300 p-12"
-    >
+    <form @submit.prevent class="m-6 flex flex-col rounded-lg border border-solid border-gray-300 p-12">
       <label for="name" value="name" class="mb-2">First Name</label>
       <input
         v-model="auth.SignUpFirstname"
@@ -31,7 +29,7 @@ let auth = useAuthenticationStore();
 
       <label for="passoword" class="mb-2"> PIN</label>
       <input
-        v-model="auth.SignUpPW"
+        v-model="auth.SignUpPIN"
         placeholder="PIN"
         class="mb-6 border border-l-0 border-r-0 border-t-0 border-solid transition-all focus:border-[#136207] focus:outline-none"
         type="password"
@@ -47,7 +45,7 @@ let auth = useAuthenticationStore();
         required
       />
 
-      <slot />
+      <SubmitBtn value="Sign Up" @click="auth.signUp" />
     </form>
   </div>
 </template>

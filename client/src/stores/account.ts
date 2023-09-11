@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { ref, reactive } from 'vue';
-import { useProfile } from './profile';
+import { useProfile } from './users';
 
 export const useAccountStore = defineStore('account', () => {
   let info = reactive({
@@ -9,10 +9,10 @@ export const useAccountStore = defineStore('account', () => {
 
   let transactionHistory = ref([]);
 
-  let profile = useProfile();
+  let user = useProfile();
 
   async function getBalance() {
-    const response = await fetch(` http://127.0.0.1:3000/account/balance?SCA_ID=${profile.SCA_ID}`, {
+    const response = await fetch(` http://127.0.0.1:3000/account/balance?SCA_ID=${user.SCA_ID}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -27,7 +27,7 @@ export const useAccountStore = defineStore('account', () => {
 
   async function getTransactionsHistory() {
     try {
-      const response = await fetch(` http://127.0.0.1:3000/account/transactionHistory?SCA_ID=${profile.SCA_ID}`, {
+      const response = await fetch(` http://127.0.0.1:3000/account/transactionHistory?SCA_ID=${user.SCA_ID}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

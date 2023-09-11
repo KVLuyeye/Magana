@@ -3,12 +3,12 @@ import BaseLayout from '@/Layouts/BaseLayout.vue';
 import NestedHeader from '@/components/Header/NestedHeader.vue';
 import EmptyDivContainer from '@/components/Containers/EmptyDivContainer.vue';
 import { ref, computed } from 'vue';
-import { useProfile } from '@/stores/profile';
+import { useProfile } from '@/stores/users';
 import { useAccountStore } from '@/stores/account';
 document.title = 'Debit';
 
 //VARS
-let profile = useProfile();
+let user = useProfile();
 let account = useAccountStore();
 
 //COMPUTED
@@ -21,7 +21,7 @@ account.getTransactionsHistory();
 <template>
   <BaseLayout>
     <template #header>
-      <NestedHeader :section-name="profile.SCA_ID_short" />
+      <NestedHeader :section-name="user.SCA_ID_short" />
     </template>
 
     <template #main>
@@ -41,7 +41,7 @@ account.getTransactionsHistory();
         >
           <div class="flex flex-row items-end justify-between pb-4 text-sm">
             <div>
-              <span class="text-md">{{ profile.shortenString(transaction.To) }}</span> <br />
+              <span class="text-md">{{ user.shortenString(transaction.To) }}</span> <br />
               <span class="text-xs tracking-wider">{{
                 new Date(transaction.executed).toLocaleDateString('en-GB')
               }}</span>
@@ -55,3 +55,4 @@ account.getTransactionsHistory();
     </template>
   </BaseLayout>
 </template>
+@/stores/users

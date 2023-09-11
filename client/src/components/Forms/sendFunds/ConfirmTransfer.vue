@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
 import { useTransfer } from '@/stores/transactions';
-import { useProfile } from '@/stores/profile';
+import { useProfile } from '@/stores/users';
 import CloseIcon from '@/assets/icons/CloseIcon.vue';
 import ForwardIcon from '@/assets/icons/ForwardIcon.vue';
 import CheckIcon from '@/assets/icons/CheckIcon.vue';
@@ -10,7 +10,7 @@ import { ref } from 'vue';
 let transfer = useTransfer();
 let isTransactionInProgress = ref(false);
 let router = useRouter();
-let profile = useProfile();
+let user = useProfile();
 
 async function transferFunds() {
   isTransactionInProgress.value = true;
@@ -38,10 +38,11 @@ async function transferFunds() {
         <h6 class="text-left text-sm text-gray-400">Amount:</h6>
         {{ transfer.amount }}
       </span>
+
       <q-separator />
       <span class="text-xl">
         <h6 class="text-left text-sm text-gray-400">Address:</h6>
-        {{ profile.shortenString(transfer.address) }}
+        {{ user.shortenString(transfer.address) }}
       </span>
     </q-card-section>
   </q-card>
@@ -84,3 +85,4 @@ async function transferFunds() {
     <q-circular-progress indeterminate rounded size="50px" color="black" class="q-ma-md" />
   </section>
 </template>
+@/stores/users

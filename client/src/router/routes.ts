@@ -8,6 +8,8 @@ import AccountView from '@/views/AccountView.vue';
 import SplashView from '@/views/SplashView.vue';
 import SendView from '@/views/SendView.vue';
 import RequestView from '@/views/RequestView.vue';
+import ContactsView from '@/views/ContactsView.vue';
+import ContactPage from '@/views/ContactPage.vue';
 import ProfileView from '@/views/ProfileView.vue';
 import DebitView from '@/views/Accounts/DebitView.vue';
 import EnterAdress from '@/components/Forms/sendFunds/EnterAddress.vue';
@@ -84,6 +86,16 @@ const router = createRouter({
       path: '/accounts/debit',
       name: 'debit',
       component: DebitView,
+    },
+    {
+      path: '/contacts',
+      name: 'contacts',
+      component: ContactsView,
+    },
+    {
+      path: '/contacts/:id',
+      name: 'contact',
+      component: ContactPage,
     },
 
     {

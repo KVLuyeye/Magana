@@ -59,7 +59,7 @@ export const useAuthenticationStore = defineStore('authentication', () => {
         SignUpPIN.value = '';
         SignUpTel.value = '';
 
-        router.replaceRoute('home');
+        router.replace('home');
       } else {
         // Error sending data
         alert('There has been an issue with your signup process. Please try again. ');
