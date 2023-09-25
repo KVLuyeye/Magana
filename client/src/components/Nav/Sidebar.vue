@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
-
 import { useSidebarStore } from '@/stores/sidebar';
 import CloseIcon from '@/assets/icons/CloseIcon.vue';
 import MenuCard from '@/components/Cards/MenuCard.vue';
@@ -35,7 +34,7 @@ onMounted(() => {
       'sidebar-closed': !sidebar.isOpen,
     }"
   >
-    <div class="mr-2 mt-2 flex flex-col items-end">
+    <div class="ml-2 mt-2 flex flex-col items-start">
       <button class="mt-2 text-2xl text-[#F9F9F9] active:scale-95" @click="sidebar.toggleSidebar">
         <CloseIcon />
       </button>
@@ -93,6 +92,9 @@ onMounted(() => {
 </template>
 
 <style scoped>
+aside {
+  filter: saturate(50%);
+}
 .sidebar-open {
   transform: translateX(0);
 }
@@ -101,4 +103,3 @@ onMounted(() => {
   transform: translateX(-100%);
 }
 </style>
-@/stores/users

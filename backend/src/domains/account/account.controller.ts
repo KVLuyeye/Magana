@@ -1,7 +1,7 @@
 import { Controller, Get, Res, Query } from '@nestjs/common';
 import { AccountService } from './account.service';
 import { Response } from 'express';
-import { EthersService } from 'src/modules/ethers/ethers.service';
+import { EthersService } from 'src/domains/ethers/ethers.service';
 
 @Controller('account')
 export class AccountController {

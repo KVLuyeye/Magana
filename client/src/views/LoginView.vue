@@ -7,6 +7,7 @@ import { useAuthenticationStore } from '@/stores/authentication';
 import ProfileIcon from '@/assets/icons/ProfileIcon.vue';
 import CloseIcon from '@/assets/icons/CloseIcon.vue';
 import { reactive, watch } from 'vue';
+import ArrowBackBtn from '@/components/Buttons/ArrowBackBtn.vue';
 document.title = 'Log in';
 
 // VARIABLES
@@ -37,8 +38,9 @@ watch(
 </script>
 
 <template>
-  <header>
-    <button class="ml-2 mt-2 text-[#21452A]" @click="dialog = true">
+  <header class="mx-4 my-2 flex items-center justify-between">
+    <ArrowBackBtn />
+    <button class="text-[#21452A]" @click="dialog = true">
       <ProfileIcon />
     </button>
   </header>
@@ -51,11 +53,9 @@ watch(
     <q-space />
 
     <!-- DIALOG -->
-    <q-dialog v-model="dialog" transition-show="slide-up" transition-hide="slide-down">
-      <q-card class="text-[#1e1e1e]">
-        <q-bar>
-          <q-space />
-
+    <q-dialog v-model="dialog" transition-show="slide-up" transition-hide="slide-down" class="">
+      <div class="flex h-[10em] flex-col items-end rounded-xl bg-white p-4 text-[#1e1e1e]">
+        <q-bar class="bg-white">
           <q-btn dense flat v-close-popup>
             <CloseIcon size="large" />
           </q-btn>
@@ -64,7 +64,7 @@ watch(
         <q-card-section>
           <q-select label="Select Account" v-model="model" :options="options" style="width: 250px" />
         </q-card-section>
-      </q-card>
+      </div>
     </q-dialog>
   </section>
 

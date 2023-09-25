@@ -1,7 +1,6 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-
 //  Indicates that you want to generate Prisma Client, a type-safe query builder for your database. It is used to send queries to your database
 generator client {
   provider = "prisma-client-js"
@@ -14,35 +13,43 @@ datasource db {
 }
 
 model User {
-  ID        Int       @id @default(autoincrement())
-  SCA_ID    String    @unique
-  Firstname String
-  Lastname  String 
-  PIN       String
-  Tel       BigInt    @unique
-  Role      Role      @default(USER)
-  joined    DateTime  @default(now())
-  Account   Account?
+  ID           Int            @id @default(autoincrement())
+  SCA_ID       String         @unique
+  Firstname    String
+  Lastname     String
+  PIN          String
+  Tel          BigInt         @unique
+  Role         Role           @default(USER)
+  joined       DateTime       @default(now())
+  Account      Account?
   Transactions Transactions[] // Add this field to associate transactions with a user
+  Notification Notification[] // Add this field to associate notifications with a user
 }
 
 model Account {
-  SCA_ID String  @id @unique
-  User   User?   @relation(fields: [SCA_ID], references: [SCA_ID])
+  SCA_ID String @id @unique
+  User   User?  @relation(fields: [SCA_ID], references: [SCA_ID])
 }
 
-
 model Transactions {
-  TransactionHash String @id
-  From    String
-  To      String
-  Amount  Int
-  SCA_ID  String 
-  executed DateTime @default(now())
-  User    User  @relation(fields: [SCA_ID], references: [SCA_ID])
+  TransactionHash String   @id
+  From            String
+  To              String
+  Amount          Int
+  SCA_ID          String
+  executed        DateTime @default(now())
+  User            User     @relation(fields: [SCA_ID], references: [SCA_ID])
+}
+
+model Notification {
+  ID        Int      @id @default(autoincrement())
+  Content   String
+  CreatedAt DateTime @default(now())
+  UserID    Int
+  User      User     @relation(fields: [UserID], references: [ID])
 }
 
 enum Role {
-  USER 
+  USER
   ADMIN
 }

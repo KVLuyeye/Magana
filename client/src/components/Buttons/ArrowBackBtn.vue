@@ -10,6 +10,6 @@ const goBack = () => {
 
 <template>
   <button @click="goBack" class="text-xl text-green-900">
-    <BackwardsIcon />
+    <BackwardsIcon class="active:scale-105" />
   </button>
 </template>

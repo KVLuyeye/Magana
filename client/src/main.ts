@@ -19,9 +19,5 @@ try {
   app.mount('#app');
 } catch (error) {
   console.error('Error decoding token:', error);
-
   alert('Please log in');
-
-  // If an error occurs (e.g., no token to decode), navigate to another route
-  router.push('/login');
 }

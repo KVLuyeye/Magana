@@ -14,7 +14,7 @@ account.getTransactionsHistory();
 </script>
 
 <template>
-  <q-scroll-area class="ml-4 mr-4 h-[25em] rounded-lg bg-white p-4">
+  <q-scroll-area class="ml-4 mr-4 h-[25em] rounded-lg bg-white p-4 shadow-2xl">
     <div
       class="ml-6 mr-6 flex h-[7em] flex-col"
       v-for="transaction in account.transactionHistory"

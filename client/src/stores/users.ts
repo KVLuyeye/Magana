@@ -19,6 +19,7 @@ export const useProfile = defineStore('profile', () => {
     Lastname: '',
     Tel: '',
     Role: '',
+    SCA_ID: SCA_ID,
   });
 
   let list = ref([]);
@@ -84,8 +85,6 @@ export const useProfile = defineStore('profile', () => {
 
       if (response.ok) {
         const users = await response.json();
-        console.log(users);
-
         list.value = users;
       }
     } catch (error) {

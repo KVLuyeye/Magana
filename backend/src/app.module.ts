@@ -1,24 +1,32 @@
 import { Module } from '@nestjs/common';
 
-import { UserController } from './modules/user/user.controller';
-import { AccountController } from './modules/wallet/account.controller';
-import { TransactionsController } from './modules/transactions/transactions.controller';
-import { NotificationsController } from './modules/notifications/notifications.controller';
-import { EthersService } from './modules/ethers/ethers.service';
-import { AccountService } from './modules/wallet/account.service';
-import { TransactionsService } from './modules/transactions/transactions.service';
-import { UserService } from './modules/user/user.service';
-import { AuthController } from './modules/auth/auth.controller';
-import { AuthService } from './modules/auth/auth.service';
-import { AuthModule } from './modules/auth/auth.module';
-import { UserModule } from './modules/user/user.module';
-import { PrismaService } from './modules/prisma/prisma.service';
-import { PrismaModule } from './modules/prisma/prisma.module';
-import { AccountModule } from './modules/wallet/account.module';
+import { UserController } from './domains/user/user.controller';
+import { AccountController } from './domains/account/account.controller';
+import { TransactionsController } from './domains/transactions/transactions.controller';
+import { EthersService } from './domains/ethers/ethers.service';
+import { AccountService } from './domains/account/account.service';
+import { TransactionsService } from './domains/transactions/transactions.service';
+import { UserService } from './domains/user/user.service';
+import { AuthController } from './domains/auth/auth.controller';
+import { AuthService } from './domains/auth/auth.service';
+import { AuthModule } from './domains/auth/auth.module';
+import { UserModule } from './domains/user/user.module';
+import { PrismaService } from './domains/prisma/prisma.service';
+import { PrismaModule } from './domains/prisma/prisma.module';
+import { AccountModule } from './domains/account/account.module';
+import { NotificationsService } from './domains/notifications/notifications.service';
 
 @Module({
   imports: [AuthModule, UserModule, PrismaModule, AccountModule],
-  controllers: [UserController, AccountController, TransactionsController, NotificationsController, AuthController],
-  providers: [EthersService, AccountService, TransactionsService, UserService, AuthService, PrismaService],
+  controllers: [UserController, AccountController, TransactionsController, AuthController],
+  providers: [
+    EthersService,
+    AccountService,
+    TransactionsService,
+    UserService,
+    AuthService,
+    PrismaService,
+    NotificationsService,
+  ],
 })
 export class AppModule {}

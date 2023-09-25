@@ -21,7 +21,7 @@ function toggleAccount() {
 
 <template>
   <section
-    class="flex min-h-screen flex-col items-center justify-between bg-gradient-to-t from-[#21452a] from-5% to-[#faf9f6] to-95%"
+    class="flex min-h-screen flex-col items-center justify-between bg-gradient-to-t from-[#21452a] from-5% to-[#e8e8e0] to-95%"
     id=""
   >
     <header class="w-full">
@@ -33,14 +33,6 @@ function toggleAccount() {
       </div>
     </header>
 
-    <!-- <div
-      class="flex w-full flex-col content-center text-center text-2xl tracking-wide"
-    >
-      Good morning
-      <span class="mt-2 text-xs text-gray-500">
-        Welcome to MAGANA Banking
-      </span>
-    </div>  -->
     <footer class="mb-12 flex w-full flex-col items-center justify-center text-xs" v-if="hasAccount">
       <MainBtn
         value="Login"

@@ -7,11 +7,7 @@ contract Account {
 
     event Withdrawal(address indexed recipient, uint256 amount);
     event Deposit(address indexed sender, uint256 amount);
-    event Transfer(
-        address indexed sender,
-        address indexed recipient,
-        uint256 amount
-    );
+    event Transfer(address indexed EOA, address indexed from, address indexed to, uint256 amount);
 
     constructor() {
         owner = msg.sender;
@@ -31,12 +27,12 @@ contract Account {
         emit Withdrawal(msg.sender, amount);
     }
 
-    function transfer(address recipient, uint256 amount) external {
-        require(recipient != address(0), 'Invalid recipient address');
+    function transfer(address to, uint256 amount) external {
+        require(to != address(0), 'Invalid recipient address');
         require(address(this).balance >= amount, 'Insufficient balance');
 
-        payable(recipient).transfer(amount);
-        emit Transfer(msg.sender, recipient, amount);
+        payable(to).transfer(amount);
+        emit Transfer(msg.sender, address(this), to, amount);
     }
 
     // Fallback function to receive funds

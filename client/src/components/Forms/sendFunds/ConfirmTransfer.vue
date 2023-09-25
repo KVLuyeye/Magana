@@ -7,11 +7,14 @@ import ForwardIcon from '@/assets/icons/ForwardIcon.vue';
 import CheckIcon from '@/assets/icons/CheckIcon.vue';
 import { ref } from 'vue';
 
+//VARS
 let transfer = useTransfer();
 let isTransactionInProgress = ref(false);
 let router = useRouter();
 let user = useProfile();
+let failed = ref(false);
 
+//METHODS
 async function transferFunds() {
   isTransactionInProgress.value = true;
   await transfer.send();
@@ -24,9 +27,15 @@ async function transferFunds() {
     isTransactionInProgress.value = false;
   } else {
     isTransactionInProgress.value = false;
-    router.back();
-    alert('Transaction has failed');
-    console.error('Transaction has failed');
+    failed.value = true;
+    transfer.address = '';
+    transfer.amount = '';
+    const reason = transfer.error.match(/reason="(.*?)"/);
+    console.log(reason[1]);
+    if (reason[1] == 'Insufficient balance') {
+      transfer.error =
+        'The transaction has failed due to insufficient balance. Please try again with a lower amount or add more funds to your account.';
+    }
   }
 }
 </script>
@@ -78,6 +87,24 @@ async function transferFunds() {
     </q-slide-item>
   </div>
 
+  <q-dialog v-model="failed">
+    <q-card class="w-[25em]">
+      <q-card-section>
+        <div class="text-h6 text-red-600">The transaction has failed</div>
+      </q-card-section>
+
+      <q-card-section>
+        <p>
+          {{ transfer.error }}
+        </p>
+      </q-card-section>
+
+      <q-card-actions align="right">
+        <q-btn flat label="OK" color="primary" v-close-popup @click="router.back()" />
+      </q-card-actions>
+    </q-card>
+  </q-dialog>
+
   <section
     class="absolute top-0 flex h-full w-full items-center justify-center bg-slate-300 opacity-70"
     v-if="isTransactionInProgress"
@@ -85,4 +112,3 @@ async function transferFunds() {
     <q-circular-progress indeterminate rounded size="50px" color="black" class="q-ma-md" />
   </section>
 </template>
-@/stores/users

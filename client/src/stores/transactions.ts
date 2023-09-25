@@ -7,6 +7,7 @@ export const useTransfer = defineStore('transferData', () => {
   let address = ref('');
   let isResponseOkay = ref();
   let user = useProfile();
+  let error = ref('');
 
   async function send() {
     try {
@@ -34,8 +35,8 @@ export const useTransfer = defineStore('transferData', () => {
         address.value = '';
         amount.value = null;
       } else {
-        // Error sending data
-        console.error('Failed to send transfer data');
+        const responseData = await response.json();
+        error.value = responseData.error;
       }
     } catch (error) {
       console.error('Error sending transfer data:', error);
@@ -64,5 +65,6 @@ export const useTransfer = defineStore('transferData', () => {
     address,
     isResponseOkay,
     send,
+    error,
   };
 });

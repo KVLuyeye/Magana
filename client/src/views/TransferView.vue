@@ -17,21 +17,20 @@ document.title = 'Transactions';
     </template>
 
     <template #main>
-      <q-card class="ml-4 mr-4 flex h-[8em] flex-row items-center justify-between rounded-xl p-4 shadow-xl">
+      <div class="ml-4 mr-4 flex h-[8em] flex-row items-center justify-between rounded-xl bg-white p-4 shadow-2xl">
         <span></span>
         <RouterLink to="/transfer/send/enterAmount">
           <OperationsBtn description="Send">
             <SendIcon class="text-xl" />
           </OperationsBtn>
         </RouterLink>
-        <OperationsBtn description="Request">
+        <!-- <OperationsBtn description="Request">
           <RequestIcon class="text-xl" />
-        </OperationsBtn>
+        </OperationsBtn> -->
         <span></span>
-      </q-card>
+      </div>
 
-      <EmptyDivContainer />
-
+      <h6 class="mb-2 ml-4 mt-[3em] w-full">Recent transactions</h6>
       <TransactionTable />
     </template>
 

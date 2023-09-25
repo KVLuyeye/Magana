@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { EthersService } from '../ethers/ethers.service';
-import { PrismaService } from 'src/modules/prisma/prisma.service';
-import { ethers } from 'ethers';
+import { PrismaService } from 'src/domains/prisma/prisma.service';
+import { ethers, Subscriber } from 'ethers';
 import { ABI, ByteCode } from '../ethers/constants';
 import { UserService } from '../user/user.service';
 
@@ -23,11 +23,12 @@ export class TransactionsService {
         ABI, // Contract ABI
         wallet, // Use the Wallet instance to sign transactions
       );
+
       // Calculate the amount for the recipient (95% of the original amount)
-      const recipientAmount = ethers.parseEther((amount * 0.995).toString());
+      const recipientAmount = ethers.parseEther((amount * 0.9995).toString());
 
       // Calculate the fee (5% of the original amount)
-      const feeAmount = ethers.parseEther((amount * 0.005).toString());
+      const feeAmount = ethers.parseEther((amount * 0.0005).toString());
 
       const txRecipient = await accountContract.transfer(recipientAddress, recipientAmount);
 
@@ -51,11 +52,16 @@ export class TransactionsService {
       const transactionHash = tx.hash;
       this.saveTransaction(senderAddress, amount, transactionHash, recipientAddress, '');
 
+      const filter = {
+        address: accountContract.address,
+        topics: [ethers.id('Transfer(address,address,uint256)')],
+      };
+
       // Transaction successful
       return true;
     } catch (error) {
       console.error('Error sending funds:', error);
-      return false;
+      throw error;
     }
   }
 

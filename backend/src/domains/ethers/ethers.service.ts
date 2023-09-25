@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ethers, JsonRpcProvider, Contract, ContractFactory, Wallet } from 'ethers';
+import { ethers, JsonRpcProvider, Contract, ContractFactory, Wallet, WebSocketProvider } from 'ethers';
 
 import { ABI, ByteCode } from './constants';
 

@@ -53,11 +53,11 @@ onMounted(() => {
   <form @submit.prevent class="flex flex-row items-center justify-center p-4">
     <header class="mb-24 flex w-full flex-col text-center text-xl leading-relaxed tracking-wider text-[#21452A]">
       Log in
-      <span class="text-sm text-gray-500"><slot /></span>
+      <span class="mt-2 text-sm text-gray-500"><slot /></span>
     </header>
 
     <input
-      class="hidden-password mr-4 w-[2em] border border-l-0 border-r-0 border-t-0 border-solid border-black text-center transition-all focus:border-[#136207] focus:outline-none"
+      class="hidden-password mr-4 w-[2em] rounded-none border border-l-0 border-r-0 border-t-0 border-solid border-black bg-inherit text-center transition-all focus:border-[#136207] focus:outline-none"
       type="tel"
       pattern="[0-9]*"
       @input="nextInput($event)"
@@ -67,7 +67,7 @@ onMounted(() => {
     />
 
     <input
-      class="hidden-password mr-4 w-[2em] border border-l-0 border-r-0 border-t-0 border-solid border-black text-center transition-all focus:border-[#136207] focus:outline-none"
+      class="hidden-password mr-4 w-[2em] rounded-none border border-l-0 border-r-0 border-t-0 border-solid border-black bg-inherit text-center transition-all focus:border-[#136207] focus:outline-none"
       type="tel"
       inputmode="numeric"
       pattern="[0-9]*"
@@ -77,7 +77,7 @@ onMounted(() => {
       v-model="auth.loginPIN.second"
     />
     <input
-      class="hidden-password mr-4 w-[2em] border border-l-0 border-r-0 border-t-0 border-solid border-black text-center transition-all focus:border-[#136207] focus:outline-none"
+      class="hidden-password mr-4 w-[2em] rounded-none border border-l-0 border-r-0 border-t-0 border-solid border-black bg-inherit text-center transition-all focus:border-[#136207] focus:outline-none"
       type="tel"
       inputmode="numeric"
       pattern="[0-9]*"
@@ -87,7 +87,7 @@ onMounted(() => {
       v-model="auth.loginPIN.third"
     />
     <input
-      class="hidden-password mr-4 w-[2em] border border-l-0 border-r-0 border-t-0 border-solid border-black text-center transition-all focus:border-[#136207] focus:outline-none"
+      class="hidden-password mr-4 w-[2em] rounded-none border border-l-0 border-r-0 border-t-0 border-solid border-black bg-inherit text-center transition-all focus:border-[#136207] focus:outline-none"
       type="tel"
       inputmode="numeric"
       pattern="[0-9]*"
@@ -97,7 +97,7 @@ onMounted(() => {
       v-model="auth.loginPIN.fourth"
     />
     <input
-      class="hidden-password mr-4 w-[2em] border border-l-0 border-r-0 border-t-0 border-solid border-black text-center transition-all focus:border-[#136207] focus:outline-none"
+      class="hidden-password mr-4 w-[2em] rounded-none border border-l-0 border-r-0 border-t-0 border-solid border-black bg-inherit text-center transition-all focus:border-[#136207] focus:outline-none"
       type="tel"
       inputmode="numeric"
       pattern="[0-9]*"
@@ -107,7 +107,7 @@ onMounted(() => {
       v-model="auth.loginPIN.fifth"
     />
     <input
-      class="hidden-password w-[2em] border border-l-0 border-r-0 border-t-0 border-solid border-black text-center transition-all focus:border-[#136207] focus:outline-none"
+      class="hidden-password w-[2em] rounded-none border border-l-0 border-r-0 border-t-0 border-solid border-black bg-inherit text-center transition-all focus:border-[#136207] focus:outline-none"
       type="tel"
       inputmode="numeric"
       pattern="[0-9]*"

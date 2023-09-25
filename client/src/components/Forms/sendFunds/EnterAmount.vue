@@ -18,7 +18,7 @@ function replaceRoute() {
 </script>
 
 <template>
-  <q-card class="mt-6 flex h-[35em] w-[95%] flex-col items-center justify-center rounded-lg p-4 text-center shadow-lg">
+  <q-card class="mt-6 flex h-[35em] w-[95%] flex-col items-center justify-center rounded-lg p-4 text-center">
     <label class="text-sm text-gray-500"> Amount </label> <br />
     <input
       v-model="transfer.amount"

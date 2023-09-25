@@ -21,18 +21,20 @@ onBeforeMount(async () => {
 
 <template>
   <BaseLayout>
-    <template #header>
-      <NestedHeader section-name="Contact" />
+    <template #header v-if="contact">
+      <NestedHeader :section-name="contact.Firstname" />
     </template>
 
     <template #main v-if="contact">
-      <q-card class="mb-2 ml-6 mr-6 flex h-full flex-col items-center justify-center p-2">
-        <ProfileIcon size="xxx-large" />
+      <div class="mb-2 ml-6 mr-6 flex h-full flex-col items-center justify-center rounded-xl bg-white p-2 shadow-2xl">
+        <label class="block w-full text-left text-gray-500">Full Name</label> <br />
         <span class="text-xl">{{ contact.Firstname }} {{ contact.Lastname }}</span>
-      </q-card>
+      </div>
       <EmptyDivContainer />
 
-      <q-card class="ml-6 mr-6 flex h-[25em] flex-col items-center justify-evenly p-2 text-center">
+      <section
+        class="ml-6 mr-6 flex h-[25em] flex-col items-center justify-evenly rounded-xl bg-white p-2 text-center shadow-2xl"
+      >
         <div class="w-full">
           <label class="block w-full text-left text-gray-500">SCA ID</label> <br />
           <span>{{ contact.SCA_ID }}</span>
@@ -42,7 +44,7 @@ onBeforeMount(async () => {
           <label class="block w-full text-left text-gray-500">Phone Number</label> <br />
           <span class="text-lg"> +{{ contact.Tel }}</span>
         </div>
-      </q-card>
+      </section>
       <EmptyDivContainer />
     </template>
   </BaseLayout>

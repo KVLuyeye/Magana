@@ -24,13 +24,16 @@ watch(balance, (balance) => {
 </script>
 
 <template>
-  <div class="mb-4 ml-4 mr-4 flex h-24 flex-col rounded-xl p-4 shadow-xl active:scale-95" @click="router.goTo(debit)">
+  <div
+    class="mb-4 ml-4 mr-4 flex h-24 flex-col rounded-xl bg-white p-4 shadow-2xl active:scale-95"
+    @click="router.goTo(debit)"
+  >
     <span class="mb-2 flex items-center justify-between text-xs text-green-900">
       {{ user.SCA_ID_short }}
       <ForwardIcon />
     </span>
 
-    <span class="text-xl"> {{ balance }} ETH </span>
+    <span class="text-xl tracking-wider"> ${{ balance }} </span>
   </div>
 </template>
 @/stores/users

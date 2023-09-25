@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import Header from "@/components/Header/MainHeader.vue";
-import NavBar from "@/components/Nav/NavBar.vue";
-import Sidebar from "@/components/Nav/Sidebar.vue";
+import Header from '@/components/Header/MainHeader.vue';
+import NavBar from '@/components/Nav/NavBar.vue';
+import Sidebar from '@/components/Nav/Sidebar.vue';
 
-import { ref, provide, inject } from "vue";
+import { ref, provide, inject } from 'vue';
 
 function showSidebar() {}
 
-provide("showSidebar", showSidebar);
+provide('showSidebar', showSidebar);
 </script>
 
 <template>
-  <body class="grid content-between items-center">
+  <body class="] grid content-between items-center">
     <header>
       <slot name="header"> </slot>
     </header>

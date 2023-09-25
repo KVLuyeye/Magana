@@ -25,15 +25,15 @@ account.getTransactionsHistory();
     </template>
 
     <template #main>
-      <q-card class="ml-4 mr-4 h-24">
-        <q-card-section class="text-2xl tracking-wider">
-          <span class="text-xs text-gray-400">Account balance</span> <br />
-          {{ balance }} ETH
+      <div class="ml-4 mr-4 h-24 rounded-xl bg-white shadow-2xl">
+        <q-card-section class="text-2xl tracking-widest">
+          <span class="text-xs text-gray-400">Balance</span> <br />
+          ${{ balance }}
         </q-card-section>
-      </q-card>
+      </div>
       <EmptyDivContainer />
 
-      <q-scroll-area class="ml-4 mr-4 h-[35em] rounded-lg bg-white p-4">
+      <q-scroll-area class="h-[35em] rounded-xl bg-white p-4 tracking-widest shadow-2xl">
         <div
           class="ml-6 mr-6 flex h-[7em] flex-col"
           v-for="transaction in account.transactionHistory"
@@ -47,7 +47,7 @@ account.getTransactionsHistory();
               }}</span>
               <br />
             </div>
-            <span class="text-lg"> - {{ transaction.Amount }} ETH</span>
+            <span class="text-lg"> - ${{ transaction.Amount }}</span>
           </div>
           <q-separator />
         </div>

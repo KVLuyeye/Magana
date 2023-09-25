@@ -8,6 +8,7 @@ import AccountView from '@/views/AccountView.vue';
 import SplashView from '@/views/SplashView.vue';
 import SendView from '@/views/SendView.vue';
 import RequestView from '@/views/RequestView.vue';
+import NoAccessView from '@/views/NoAccessView.vue';
 import ContactsView from '@/views/ContactsView.vue';
 import ContactPage from '@/views/ContactPage.vue';
 import ProfileView from '@/views/ProfileView.vue';
@@ -114,7 +115,27 @@ const router = createRouter({
       name: 'signup',
       component: SignUpView,
     },
+    {
+      path: '/noAccess',
+      name: 'noAccess',
+      component: NoAccessView,
+    },
   ],
+});
+
+//TODO: Add auth guard to route already logged in users to home
+router.beforeEach((to, from, next) => {
+  const hasAccessToken = document.cookie.includes('access_token');
+
+  // Check if the user is trying to access a protected route without an access token
+  if (!hasAccessToken && to.name !== 'splash' && to.name !== 'welcome' && to.name !== 'login' && to.name !== 'signup') {
+    // Redirect to the 'welcome' route if 'access_token' is not found
+    next({ name: 'welcome' });
+    alert('Please Login or Sign Up if you have not created an account yet');
+  } else {
+    // Proceed to the requested route
+    next();
+  }
 });
 
 export default router;
