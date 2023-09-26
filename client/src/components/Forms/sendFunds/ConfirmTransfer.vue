@@ -31,7 +31,9 @@ async function transferFunds() {
     transfer.address = '';
     transfer.amount = '';
     const reason = transfer.error.match(/reason="(.*?)"/);
-    console.log(reason[1]);
+    if (reason) {
+      console.log(reason[1]);
+    }
     if (reason[1] == 'Insufficient balance') {
       transfer.error =
         'The transaction has failed due to insufficient balance. Please try again with a lower amount or add more funds to your account.';

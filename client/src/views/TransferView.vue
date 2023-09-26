@@ -17,20 +17,36 @@ document.title = 'Transactions';
     </template>
 
     <template #main>
-      <div class="ml-4 mr-4 flex h-[8em] flex-row items-center justify-between rounded-xl bg-white p-4 shadow-2xl">
-        <span></span>
-        <RouterLink to="/transfer/send/enterAmount">
-          <OperationsBtn description="Send">
+      <!-- <div class="flex flex-row items-center justify-center"> -->
+      <span class="flex flex-col items-center justify-center">
+        <RouterLink to="/transfer/send/enterAmount" class="flex flex-col items-center justify-center">
+          <OperationsBtn description="" class="shadow-2xl">
             <SendIcon class="text-xl" />
           </OperationsBtn>
         </RouterLink>
-        <!-- <OperationsBtn description="Request">
-          <RequestIcon class="text-xl" />
-        </OperationsBtn> -->
-        <span></span>
-      </div>
+      </span>
 
-      <h6 class="mb-2 ml-4 mt-[3em] w-full">Recent transactions</h6>
+      <!-- <span class="flex flex-col items-center justify-center">
+        <RouterLink to="/transfer/send/enterAmount" class="flex flex-col items-center justify-center">
+          <OperationsBtn description="" class="shadow-2xl">
+            <SendIcon class="text-xl" />
+          </OperationsBtn>
+        </RouterLink>
+      </span>
+
+      <span class="flex flex-col items-center justify-center">
+        <RouterLink to="/transfer/send/enterAmount" class="flex flex-col items-center justify-center">
+          <OperationsBtn description="" class="shadow-2xl">
+            <SendIcon class="text-xl" />
+          </OperationsBtn>
+        </RouterLink>
+      </span> -->
+
+      <q-separator class="mx-4" />
+
+      <!-- </div> -->
+
+      <h6 class="mb-2 ml-4 w-full">Recent transactions</h6>
       <TransactionTable />
     </template>
 
@@ -43,5 +59,12 @@ document.title = 'Transactions';
 <style scoped>
 main {
   align-content: start !important;
+}
+
+.q-separator {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  margin-left: 1rem !important;
+  margin-right: 1rem !important;
 }
 </style>

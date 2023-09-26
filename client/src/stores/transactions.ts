@@ -16,7 +16,7 @@ export const useTransfer = defineStore('transferData', () => {
         recipientAddress: address.value,
         amount: amount.value,
       };
-      const response = await fetch('http://127.0.0.1:3000/transactions/send', {
+      const response = await fetch(' https://2fd6-134-21-131-126.ngrok-free.app/transactions/send', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -12,6 +12,14 @@ export class TransactionsService {
 
   constructor(private ethersService: EthersService, private prisma: PrismaService, private user: UserService) {}
 
+  /**
+   * Sends funds from one address to another.
+   * @param senderAddress The address of the sender.
+   * @param recipientAddress The address of the recipient.
+   * @param amount The amount of funds to send.
+   * @returns A boolean indicating whether the transaction was successful.
+   * @throws An error if the transaction fails.
+   */
   async send(senderAddress: string, recipientAddress: string, amount: number) {
     try {
       // Create an instance of the Wallet using the private key
@@ -50,15 +58,14 @@ export class TransactionsService {
       }
 
       const transactionHash = tx.hash;
-      this.saveTransaction(senderAddress, amount, transactionHash, recipientAddress, '');
-
-      const filter = {
-        address: accountContract.address,
-        topics: [ethers.id('Transfer(address,address,uint256)')],
-      };
-
-      // Transaction successful
-      return true;
+      if (transactionHash) {
+        this.saveTransaction(senderAddress, amount, transactionHash, recipientAddress, '');
+        // Transaction successful
+        return true;
+      } else {
+        // Transaction failed
+        return false;
+      }
     } catch (error) {
       console.error('Error sending funds:', error);
       throw error;
@@ -94,6 +101,15 @@ export class TransactionsService {
     }
   }
 
+  /**
+   * Saves a transaction to the database.
+   * @param account - The ID of the account associated with the transaction.
+   * @param amount - The amount of the transaction.
+   * @param transactionHash - The hash of the transaction.
+   * @param To - The recipient of the transaction (optional).
+   * @param From - The sender of the transaction (optional).
+   * @returns A Promise that resolves to the saved transaction.
+   */
   async saveTransaction(account: string, amount: number, transactionHash: string, To?: string, From?: string) {
     try {
       const transaction = await this.prisma.transactions.create({

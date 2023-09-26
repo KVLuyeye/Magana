@@ -52,8 +52,6 @@ const contactLength = computed(() => {
 
 onBeforeMount(async () => {
   await users.findAllUsers();
-  console.log(users.list);
-  console.log(users.current.SCA_ID);
 });
 </script>
 

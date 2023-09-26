@@ -10,15 +10,31 @@ export class UserService {
   constructor(private prisma: PrismaService, private ethers: EthersService) {}
 
   // Method to set the current user's SCA_ID when they log in
+  /**
+   * Sets the current user ID.
+   * @param SCA_ID - The ID of the current user.
+   */
   setCurrentUser(SCA_ID: string) {
     this.currentUserId = SCA_ID;
   }
 
   // Method to get the current user's SCA_ID
+  /**
+   * Returns the ID of the current user, or null if no user is logged in.
+   * @returns {string | null} The ID of the current user, or null if no user is logged in.
+   */
   getCurrentUser(): string | null {
     return this.currentUserId;
   }
 
+  /**
+   * Creates a new user with the given information.
+   * @param {string} FirstName - The first name of the user.
+   * @param {string} LastName - The last name of the user.
+   * @param {number} Tel - The telephone number of the user.
+   * @param {string} PIN - The PIN of the user.
+   * @returns {Promise<void>} - A promise that resolves when the user is created.
+   */
   async createUser(FirstName: string, LastName: string, Tel: number, PIN: string) {
     const SCA_ID = await this.ethers.deployAccount();
 
@@ -33,6 +49,11 @@ export class UserService {
     });
   }
 
+  /**
+   * Finds a user by their SCA_ID.
+   * @param SCA_ID - The SCA_ID of the user to find.
+   * @returns A Promise that resolves to the found User object, or null if no user was found.
+   */
   async findUser(SCA_ID: string): Promise<User | null> {
     const user = await this.prisma.user.findUnique({
       where: {
@@ -48,6 +69,10 @@ export class UserService {
     return user;
   }
 
+  /**
+   * Retrieves all users from the database.
+   * @returns A JSON string representing the list of users, with BigInt values converted to strings.
+   */
   async findAllUsers() {
     const users = await this.prisma.user.findMany();
 

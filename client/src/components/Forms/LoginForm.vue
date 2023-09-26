@@ -1,20 +1,25 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch, onMounted, reactive } from 'vue';
+import type { Ref } from 'vue';
 import { useAuthenticationStore } from '@/stores/authentication';
-import { reactive } from 'vue';
-import { onMounted } from 'vue';
-let inputFirst = ref(null);
-let inputSecond = ref(null);
-let inputThird = ref(null);
-let inputFourth = ref(null);
-let inputFifth = ref(null);
-let inputSixth = ref(null);
+
+let inputFirst: Ref<HTMLInputElement | null> = ref(null);
+let inputSecond: Ref<HTMLInputElement | null> = ref(null);
+let inputThird: Ref<HTMLInputElement | null> = ref(null);
+let inputFourth: Ref<HTMLInputElement | null> = ref(null);
+let inputFifth: Ref<HTMLInputElement | null> = ref(null);
+let inputSixth: Ref<HTMLInputElement | null> = ref(null);
 
 let auth = useAuthenticationStore();
+let failed = auth.loginFailed;
 
 //FUNCTIONS
 
-/** Forces an input to only accept one digit*/
+/**
+ * Forces an input to only accept one digit
+ * Truncates the input value to a single digit.
+ * @param {Event} event - The input event.
+ */
 function singleDigit(event: Event) {
   // Get the first character from the input value
   const inputValue = (event.target as HTMLInputElement).value.slice(0, 1);
@@ -23,7 +28,10 @@ function singleDigit(event: Event) {
   (event.target as HTMLInputElement).value = inputValue;
 }
 
-/** Function that automatically moves to the next input*/
+/**
+ * Moves focus to the next input element if the current input has a value of length 1.
+ * @param {Event} event - The event object.
+ */
 function nextInput(event: Event) {
   // Get the input element that triggered the event
   const currentInput = event.target as HTMLInputElement;
@@ -41,15 +49,36 @@ function nextInput(event: Event) {
   }
 }
 
+function previousInput(event: KeyboardEvent) {
+  if (event.key === 'Backspace') {
+    const currentInput = event.target as HTMLInputElement;
+    const previousInput = currentInput.previousElementSibling as HTMLInputElement;
+    if (previousInput) {
+      previousInput.focus();
+    }
+  }
+}
+
+/**
+ * Focuses on the first input element.
+ */
+function focusFirstInput() {
+  inputFirst.value?.focus();
+}
+
+//TODO: Focus on the first input when the login has failed
+//WATCHERS
+watch(failed, (newValue) => {
+  if (newValue) {
+    focusFirstInput();
+  }
+});
+
 onMounted(() => {
-  inputFirst.value.focus();
+  focusFirstInput();
 });
 </script>
 <template>
-  <!--
-    Save every input into an array, take the values and send it to the server for authentication
-  -->
-
   <form @submit.prevent class="flex flex-row items-center justify-center p-4">
     <header class="mb-24 flex w-full flex-col text-center text-xl leading-relaxed tracking-wider text-[#21452A]">
       Log in
@@ -71,6 +100,7 @@ onMounted(() => {
       type="tel"
       inputmode="numeric"
       pattern="[0-9]*"
+      @keydown="previousInput($event)"
       @input="nextInput($event)"
       ref="inputSecond"
       required
@@ -81,6 +111,7 @@ onMounted(() => {
       type="tel"
       inputmode="numeric"
       pattern="[0-9]*"
+      @keydown="previousInput($event)"
       @input="nextInput($event)"
       ref="inputThird"
       required
@@ -92,6 +123,7 @@ onMounted(() => {
       inputmode="numeric"
       pattern="[0-9]*"
       @input="nextInput($event)"
+      @keydown="previousInput($event)"
       ref="inputFourth"
       required
       v-model="auth.loginPIN.fourth"
@@ -101,6 +133,7 @@ onMounted(() => {
       type="tel"
       inputmode="numeric"
       pattern="[0-9]*"
+      @keydown="previousInput($event)"
       @input="nextInput($event)"
       ref="inputFifth"
       required
@@ -111,6 +144,7 @@ onMounted(() => {
       type="tel"
       inputmode="numeric"
       pattern="[0-9]*"
+      @keydown="previousInput($event)"
       @input="nextInput($event), singleDigit($event), auth.login()"
       ref="inputSixth"
       required

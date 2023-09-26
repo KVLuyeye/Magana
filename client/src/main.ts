@@ -19,5 +19,11 @@ try {
   app.mount('#app');
 } catch (error) {
   console.error('Error decoding token:', error);
-  alert('Please log in');
+
+  app.use(Quasar, {
+    plugins: {},
+  });
+  app.use(router);
+  app.mount('#app');
+  router.push('noAccess');
 }

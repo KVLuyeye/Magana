@@ -5,7 +5,7 @@ import { ABI, ByteCode } from './constants';
 
 @Injectable()
 export class EthersService {
-  private networkURL = 'http://127.0.0.1:8545/';
+  private networkURL = 'https://382d-134-21-131-126.ngrok-free.app';
 
   public provider: JsonRpcProvider = new JsonRpcProvider(this.networkURL);
 
@@ -15,6 +15,10 @@ export class EthersService {
   }
 
   //Deploy Contract
+  /**
+   * Deploys a new account contract and returns its address.
+   * @returns The address of the newly deployed account contract.
+   */
   public async deployAccount(): Promise<string> {
     const AccountABI = ABI;
     const AccountBytecode = ByteCode;
@@ -32,12 +36,22 @@ export class EthersService {
   }
   // Create the contract instance
 
+  /**
+   * Returns a new instance of the Contract class for the specified address and ABI.
+   * @param address The address of the contract.
+   * @returns A new instance of the Contract class.
+   */
   public getAccountContract(address: string): Contract {
     const AccountABI = ABI;
 
     return new Contract(address, AccountABI, this.provider);
   }
 
+  /**
+   * Gets the balance of an Ethereum address.
+   * @param address The Ethereum address to get the balance of.
+   * @returns A Promise that resolves to a string representing the balance of the address in Ether.
+   */
   public async getBalance(address: string): Promise<string> {
     // Get the balance of an Ethereum address
     const balance = await this.provider.getBalance(address);

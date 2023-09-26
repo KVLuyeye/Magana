@@ -33,7 +33,7 @@ watch(balance, (balance) => {
       <ForwardIcon />
     </span>
 
-    <span class="text-xl tracking-wider"> ${{ balance }} </span>
+    <span class="text-xl tracking-wider" v-if="balance"> {{ '$' + balance }} </span>
   </div>
 </template>
 @/stores/users

@@ -128,13 +128,23 @@ router.beforeEach((to, from, next) => {
   const hasAccessToken = document.cookie.includes('access_token');
 
   // Check if the user is trying to access a protected route without an access token
-  if (!hasAccessToken && to.name !== 'splash' && to.name !== 'welcome' && to.name !== 'login' && to.name !== 'signup') {
+  if (
+    !hasAccessToken &&
+    to.name !== 'splash' &&
+    to.name !== 'welcome' &&
+    to.name !== 'login' &&
+    to.name !== 'signup' &&
+    to.name !== 'noAccess'
+  ) {
     // Redirect to the 'welcome' route if 'access_token' is not found
-    next({ name: 'welcome' });
-    alert('Please Login or Sign Up if you have not created an account yet');
+    next({ name: 'noAccess' });
   } else {
     // Proceed to the requested route
     next();
+  }
+
+  if (from.name === 'login') {
+    window.location.reload();
   }
 });
 

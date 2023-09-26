@@ -7,11 +7,11 @@ tunnels:
   app2:
     addr: 3000 # Server
     proto: http
-  app4:
-    addr: 8545 # Postgres
-    proto: http
   app3:
-    addr: 5432 # HH Node
+    addr: 8545 # HH Node
+    proto: http
+  app4:
+    addr: 5432 # Postgres
     proto: http
 version: 2
 #ngrok start --config=ngrok.yaml app1 app2 app3 app4

@@ -15,10 +15,20 @@ export class AccountService {
 
   constructor(private prisma: PrismaService) {}
 
+  /**
+   * Retrieves the balance of a given smart contract account from the network.
+   * @param SCA_ID - The ID of the smart contract account to retrieve the balance for.
+   * @returns A Promise that resolves to the balance of the smart contract account.
+   */
   async getBalance(SCA_ID: string) {
     return await this.ethersService.getBalance(SCA_ID);
   }
 
+  /**
+   * Retrieves the transaction history for a given SCA_ID from the database.
+   * @param SCA_ID - The ID of the SCA to retrieve transaction history for.
+   * @returns A Promise that resolves to an array of transaction objects.
+   */
   async getTransactionsHistory(SCA_ID: string) {
     return await this.prisma.transactions.findMany({
       where: {

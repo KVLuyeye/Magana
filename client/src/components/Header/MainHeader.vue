@@ -20,10 +20,13 @@ defineProps({
     </button>
 
     <h1 class="w-[4em] text-center text-xl">{{ sectionName }}</h1>
-    <q-btn-dropdown dropdown-icon="notifications">
-      <q-list class="w-[25em]">
-        <q-item> </q-item>
-      </q-list>
-    </q-btn-dropdown>
+    <button>
+      <BellIcon />
+      <q-menu dropdown-icon="notifications">
+        <q-list class="w-[25em]">
+          <q-item> </q-item>
+        </q-list>
+      </q-menu>
+    </button>
   </header>
 </template>

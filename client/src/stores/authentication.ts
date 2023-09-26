@@ -9,6 +9,8 @@ export const useAuthenticationStore = defineStore('authentication', () => {
   let SignUpLastname = ref('');
   let SignUpPIN = ref('');
   let SignUpTel = ref('');
+  let tokenHasExpired = ref(true);
+  let tokenExpirationTimeStamp = ref(0);
 
   let loginID = ref('');
 
@@ -20,6 +22,8 @@ export const useAuthenticationStore = defineStore('authentication', () => {
     fifth: null,
     sixth: null,
   });
+
+  let loginFailed = ref(false);
 
   let isResponseOkay = ref();
 
@@ -76,7 +80,7 @@ export const useAuthenticationStore = defineStore('authentication', () => {
         PIN: loginPIN.first + loginPIN.second + loginPIN.third + loginPIN.fourth + loginPIN.fifth + loginPIN.sixth,
       };
 
-      const response = await fetch('http://127.0.0.1:3000/auth/login', {
+      const response = await fetch('https://2fd6-134-21-131-126.ngrok-free.app/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json; charset=utf-8',
@@ -89,8 +93,14 @@ export const useAuthenticationStore = defineStore('authentication', () => {
         console.log('Logged in successfully');
         const responseData = await response.json();
         const accessToken = responseData.access_token;
-        const expiryTimeInSeconds = 600;
-        document.cookie = `access_token=${accessToken}; Secure; SameSite=Strict`;
+
+        const expiryTimeInSeconds = 3000; //300 seconds = 5 minutes
+        tokenExpirationTimeStamp.value = Date.now() + expiryTimeInSeconds * 1000;
+        tokenHasExpired.value = tokenExpirationTimeStamp.value < Date.now();
+
+        document.cookie = `access_token=${accessToken}; Secure; SameSite=Strict;  expires=${new Date(
+          tokenExpirationTimeStamp.value,
+        ).toUTCString()}`;
 
         // Reset form values
         (loginPIN.first = null),
@@ -102,16 +112,17 @@ export const useAuthenticationStore = defineStore('authentication', () => {
           router.replace('home').then(() => {
             window.location.reload();
           });
+      } else {
+        loginFailed.value = true;
+        (loginPIN.first = ''),
+          (loginPIN.second = ''),
+          (loginPIN.third = ''),
+          (loginPIN.fourth = ''),
+          (loginPIN.fifth = ''),
+          (loginPIN.sixth = '');
       }
     } catch (error) {
       console.error('Login has failed: ', error);
-      window.alert('Login has failed. Please try again. ' + error);
-      (loginPIN.first = null),
-        (loginPIN.second = null),
-        (loginPIN.third = null),
-        (loginPIN.fourth = null),
-        (loginPIN.fifth = null),
-        (loginPIN.sixth = null);
     }
   }
 
@@ -125,5 +136,8 @@ export const useAuthenticationStore = defineStore('authentication', () => {
     loginPIN,
     loginID,
     isResponseOkay,
+    tokenExpirationTimeStamp,
+    tokenHasExpired,
+    loginFailed,
   };
 });

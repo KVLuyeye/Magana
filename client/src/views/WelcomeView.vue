@@ -6,13 +6,12 @@ import SubmitBtn from '@/components/Buttons/SubmitBtn.vue';
 import { ref } from 'vue';
 import { useAuthenticationStore } from '@/stores/authentication';
 import { useRoutingStore } from '@/stores/routing';
+import { useRouter } from 'vue-router';
 import type ProfileIconVue from '@/assets/icons/ProfileIcon.vue';
 import ProfileBtn from '@/components/Buttons/ProfileBtn.vue';
 document.title = 'Welcome';
-let router = useRoutingStore();
+let router = useRouter();
 const hasAccount = ref(true);
-
-let login = 'login';
 
 function toggleAccount() {
   hasAccount.value = !hasAccount.value;
@@ -37,7 +36,7 @@ function toggleAccount() {
       <MainBtn
         value="Login"
         class="mb-4 h-[1.25em] w-3/4 rounded-lg bg-[#1E1E1E] text-lg"
-        @click="router.goTo(login)"
+        @click="router.replace('login')"
       />
 
       <span>
@@ -50,7 +49,7 @@ function toggleAccount() {
       <MainBtn
         value="Sign Up"
         class="mb-4 h-[1.25em] w-3/4 rounded-lg bg-[#1E1E1E] text-lg"
-        @click="router.goTo('signup')"
+        @click="router.push('signup')"
       />
 
       <span>

@@ -12,7 +12,7 @@ export const useAccountStore = defineStore('account', () => {
   let user = useProfile();
 
   async function getBalance() {
-    const response = await fetch(` http://127.0.0.1:3000/account/balance?SCA_ID=${user.SCA_ID}`, {
+    const response = await fetch(`https://2fd6-134-21-131-126.ngrok-free.app/account/balance?SCA_ID=${user.SCA_ID}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -27,15 +27,19 @@ export const useAccountStore = defineStore('account', () => {
 
   async function getTransactionsHistory() {
     try {
-      const response = await fetch(` http://127.0.0.1:3000/account/transactionHistory?SCA_ID=${user.SCA_ID}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
+      const response = await fetch(
+        `https://2fd6-134-21-131-126.ngrok-free.app/account/transactionHistory?SCA_ID=${user.SCA_ID}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
         },
-      });
+      );
 
       if (response.ok) {
-        transactionHistory.value = await response.json();
+        let transactions = await response.json();
+        transactionHistory.value = transactions.reverse();
       }
     } catch (error) {
       console.error(error);

@@ -23,18 +23,18 @@ document.title = 'Home';
     <template #main>
       <AccountCard />
       <EmptyDivContainer />
-      <div class="ml-4 mr-4 flex h-[6em] flex-row items-center justify-between rounded-xl bg-white p-4 shadow-2xl">
-        <span></span>
-        <RouterLink to="/transfer/send/enterAmount">
-          <OperationsBtn description="Send">
+      <!-- <div class="ml-4 mr-4 flex h-[6em] flex-row items-center justify-between rounded-xl bg-white p-4 shadow-2xl"> -->
+      <span class="flex w-full flex-col items-center justify-center">
+        <RouterLink to="/transfer/send/enterAmount" class="flex flex-col items-center justify-center">
+          <OperationsBtn description="Send" class="shadow-2xl">
             <SendIcon class="text-xl" />
           </OperationsBtn>
         </RouterLink>
-        <!-- <OperationsBtn description="Request">
+      </span>
+      <!-- <OperationsBtn description="Request">
           <RequestIcon class="text-xl" />
         </OperationsBtn> -->
-        <span></span>
-      </div>
+      <!-- </div> -->
 
       <EmptyDivContainer />
       <EmptyDivContainer />
