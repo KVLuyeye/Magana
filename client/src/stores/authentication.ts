@@ -80,7 +80,7 @@ export const useAuthenticationStore = defineStore('authentication', () => {
         PIN: loginPIN.first + loginPIN.second + loginPIN.third + loginPIN.fourth + loginPIN.fifth + loginPIN.sixth,
       };
 
-      const response = await fetch('https://2fd6-134-21-131-126.ngrok-free.app/auth/login', {
+      const response = await fetch('http://127.0.0.1:3000/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json; charset=utf-8',
