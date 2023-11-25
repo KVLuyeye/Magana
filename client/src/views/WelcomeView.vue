@@ -34,7 +34,7 @@ function toggleAccount() {
 
     <footer class="mb-12 flex w-full flex-col items-center justify-center text-xs" v-if="hasAccount">
       <MainBtn
-        value="Login"
+        button-name="Login"
         class="mb-4 h-[1.25em] w-3/4 rounded-lg bg-[#1E1E1E] text-lg"
         @click="router.replace('login')"
       />
@@ -47,7 +47,7 @@ function toggleAccount() {
 
     <footer class="mb-12 flex w-full flex-col items-center justify-center text-xs" v-else>
       <MainBtn
-        value="Sign Up"
+        button-name="Sign Up"
         class="mb-4 h-[1.25em] w-3/4 rounded-lg bg-[#1E1E1E] text-lg"
         @click="router.push('signup')"
       />

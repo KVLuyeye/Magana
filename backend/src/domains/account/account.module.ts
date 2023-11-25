@@ -5,7 +5,7 @@ import { AccountService } from './account.service';
 import { UserService } from '../user/user.service';
 
 @Module({
-  providers: [EthersService, AccountService, UserService],
+  providers: [EthersService, AccountService],
   exports: [AccountService],
   imports: [PrismaModule],
 })

@@ -1,11 +1,16 @@
-import { Controller, Get, Res, Query } from '@nestjs/common';
+import { Controller, Get, Res, Query, Post, Body } from '@nestjs/common';
 import { AccountService } from './account.service';
 import { Response } from 'express';
 import { EthersService } from 'src/domains/ethers/ethers.service';
+import { UserService } from '../user/user.service';
 
 @Controller('account')
 export class AccountController {
-  constructor(private ethersService: EthersService, private accountService: AccountService) {}
+  constructor(
+    private ethersService: EthersService,
+    private accountService: AccountService,
+    private userService: UserService,
+  ) {}
 
   @Get('balance')
   async getBalance(@Res() res: Response, @Query('SCA_ID') SCA_ID: string) {
@@ -28,6 +33,18 @@ export class AccountController {
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'An error occurred while getting the transaction history.' });
+    }
+  }
+
+  @Post('deposit')
+  async deposit(@Res() res: Response, @Body() amount: string) {
+    try {
+      await this.ethersService.deposit(amount, this.userService.getCurrentUser());
+
+      console.log('Deposited: ' + amount + ' to ' + this.userService.getCurrentUser());
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'An error occurred while depositing.' });
     }
   }
 }

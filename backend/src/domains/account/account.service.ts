@@ -8,7 +8,7 @@ import { TransactionsService } from '../transactions/transactions.service';
 
 @Injectable()
 export class AccountService {
-  private privateKey = 'a207c8262c084160cbb13643357359207b5b04a2ef93ea15210213ec232a303c';
+  private privateKey = '0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80';
   ethersService: EthersService;
   transactionsService: TransactionsService;
   user: UserService;
@@ -39,5 +39,5 @@ export class AccountService {
 
   withdraw() {}
 
-  deposit() {}
+  deposit(amount: string) {}
 }

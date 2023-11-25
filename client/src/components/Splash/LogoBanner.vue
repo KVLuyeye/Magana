@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, onMounted } from 'vue';
 
-const letters = ref(["M ", "A ", "G ", "A ", "N ", "A"]);
+const letters = ref(['M ', 'A ', 'G ', 'A ', 'N ', 'A']);
 //const letters = ref(["L ", "U ", "Y ", "E ", "Y ", "E"]);
 
 onMounted(() => {
@@ -9,15 +9,13 @@ onMounted(() => {
 });
 
 function animateLetters() {
-  const lettersContainer = ref("lettersContainer");
+  const lettersContainer = ref('lettersContainer');
   const letterElements = lettersContainer.value;
 }
 </script>
 
 <template>
-  <section
-    class="flex min-h-screen flex-col items-center justify-between bg-[#21452A] text-3xl text-[#FAF9F6]"
-  >
+  <section class="flex min-h-screen flex-col items-center justify-between bg-[#21452A] text-3xl text-[#FAF9F6]">
     <div><!--Empty Positioning DIV --></div>
 
     <div ref="lettersContainer" class="letters-container">
@@ -31,12 +29,12 @@ function animateLetters() {
       </div>
     </div>
 
-    <div class="mb-4 text-xs">©2023 MAGANA Inc.</div>
+    <div class="mb-4 text-xs">©2023 MGN Group</div>
   </section>
 </template>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Coda+Caption:wght@800&family=Cormorant+Garamond:wght@300&family=Josefin+Sans:wght@700&family=Playfair+Display&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Coda+Caption:wght@800&family=Cormorant+Garamond:wght@300&family=Josefin+Sans:wght@700&family=Playfair+Display&display=swap');
 
 section {
   font-family: serif;

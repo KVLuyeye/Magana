@@ -6,7 +6,7 @@ import { TransactionsController } from './domains/transactions/transactions.cont
 import { EthersService } from './domains/ethers/ethers.service';
 import { AccountService } from './domains/account/account.service';
 import { TransactionsService } from './domains/transactions/transactions.service';
-import { UserService } from './domains/user/user.service';
+import { UserService } from 'src/domains/user/user.service';
 import { AuthController } from './domains/auth/auth.controller';
 import { AuthService } from './domains/auth/auth.service';
 import { AuthModule } from './domains/auth/auth.module';
@@ -15,9 +15,10 @@ import { PrismaService } from './domains/prisma/prisma.service';
 import { PrismaModule } from './domains/prisma/prisma.module';
 import { AccountModule } from './domains/account/account.module';
 import { NotificationsService } from './domains/notifications/notifications.service';
+import { EthersModule } from './domains/ethers/ethers.module';
 
 @Module({
-  imports: [AuthModule, UserModule, PrismaModule, AccountModule],
+  imports: [AuthModule, UserModule, PrismaModule, AccountModule, EthersModule],
   controllers: [UserController, AccountController, TransactionsController, AuthController],
   providers: [
     EthersService,

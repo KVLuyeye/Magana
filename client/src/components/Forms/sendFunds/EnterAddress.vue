@@ -57,7 +57,7 @@ watch(selectedName, (newName) => {
     </div>
     <br />
 
-    <MainBtn value="Continue" @click="replaceRoute" />
+    <MainBtn button-name="Continue" @click="replaceRoute" />
   </q-card>
 </template>
 @/stores/users

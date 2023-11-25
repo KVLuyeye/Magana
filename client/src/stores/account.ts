@@ -25,6 +25,27 @@ export const useAccountStore = defineStore('account', () => {
     }
   }
 
+  async function deposit(amount: string) {
+    debugger;
+    try {
+      const response = await fetch(`http://127.0.0.1:3000/account/deposit`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          amount: amount,
+        }),
+      });
+
+      if (response.ok) {
+        console.log('Deposit successful');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   async function getTransactionsHistory() {
     try {
       const response = await fetch(`http://127.0.0.1:3000/account/transactionHistory?SCA_ID=${user.SCA_ID}`, {
@@ -42,5 +63,5 @@ export const useAccountStore = defineStore('account', () => {
       console.error(error);
     }
   }
-  return { getBalance, getTransactionsHistory, info, transactionHistory };
+  return { getBalance, getTransactionsHistory, info, transactionHistory, deposit };
 });

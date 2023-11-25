@@ -5,7 +5,7 @@ import { PrismaService } from 'src/domains/prisma/prisma.service';
 
 @Injectable()
 export class UserService {
-  private currentUserId: string | null = null;
+  private static currentUserId: string | null;
 
   constructor(private prisma: PrismaService, private ethers: EthersService) {}
 
@@ -15,16 +15,16 @@ export class UserService {
    * @param SCA_ID - The ID of the current user.
    */
   setCurrentUser(SCA_ID: string) {
-    this.currentUserId = SCA_ID;
+    UserService.currentUserId = SCA_ID;
   }
 
   // Method to get the current user's SCA_ID
   /**
    * Returns the ID of the current user, or null if no user is logged in.
-   * @returns {string | null} The ID of the current user, or null if no user is logged in.
+   * @returns {string} The ID of the current user, or null if no user is logged in.
    */
-  getCurrentUser(): string | null {
-    return this.currentUserId;
+  getCurrentUser(): string {
+    return UserService.currentUserId;
   }
 
   /**

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ethers, JsonRpcProvider, Contract, ContractFactory, Wallet, WebSocketProvider } from 'ethers';
-
+import { UserService } from 'src/domains/user/user.service';
 import { ABI, ByteCode } from './constants';
 
 @Injectable()
@@ -34,7 +34,25 @@ export class EthersService {
 
     return address;
   }
-  // Create the contract instance
+
+  public async deposit(amount: string, SCA_ID: string) {
+    const AccountABI = ABI;
+    const AccountBytecode = ByteCode;
+    const privateKey = '0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80';
+    const signer = new Wallet(privateKey, this.provider);
+
+    console.log('The amount to be sent:', amount);
+    const amountToSend = ethers.parseEther(amount);
+
+    // Send the transaction
+
+    const transaction = await signer.sendTransaction({
+      to: SCA_ID,
+      value: amountToSend.toString(),
+    });
+
+    console.log('Transaction hash:', transaction.hash);
+  }
 
   /**
    * Returns a new instance of the Contract class for the specified address and ABI.

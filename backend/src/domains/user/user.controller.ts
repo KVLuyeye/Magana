@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Post, Res, Query } from '@nestjs/common';
-import { Response } from 'express';
+import { Response, response } from 'express';
 import { UserService } from './user.service';
 import { User } from '@prisma/client';
 
@@ -43,5 +43,10 @@ export class UserController {
       console.error(error);
       res.status(500).json({ message: 'An error occurred while finding the user.' });
     }
+  }
+
+  @Get('currentUser')
+  async getCurrentUser(@Res() response: Response) {
+    return response.json(this.userService.getCurrentUser());
   }
 }
