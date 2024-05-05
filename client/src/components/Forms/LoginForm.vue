@@ -11,7 +11,8 @@ let inputFifth: Ref<HTMLInputElement | null> = ref(null);
 let inputSixth: Ref<HTMLInputElement | null> = ref(null);
 
 let auth = useAuthenticationStore();
-let failed = auth.loginFailed;
+let failed = ref(false);
+failed.value = auth.loginFailed;
 
 //FUNCTIONS
 

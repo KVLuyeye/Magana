@@ -25,7 +25,7 @@ export const useAccountStore = defineStore('account', () => {
     }
   }
 
-  async function deposit(amount: string) {
+  async function deposit(amount: string | undefined) {
     debugger;
     try {
       const response = await fetch(`http://127.0.0.1:3000/account/deposit`, {

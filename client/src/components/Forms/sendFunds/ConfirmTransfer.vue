@@ -33,10 +33,10 @@ async function transferFunds() {
     const reason = transfer.error.match(/reason="(.*?)"/);
     if (reason) {
       console.log(reason[1]);
-    }
-    if (reason[1] == 'Insufficient balance') {
-      transfer.error =
-        'The transaction has failed due to insufficient balance. Please try again with a lower amount or add more funds to your account.';
+      if (reason[1] == 'Insufficient balance') {
+        transfer.error =
+          'The transaction has failed due to insufficient balance. Please try again with a lower amount or add more funds to your account.';
+      }
     }
   }
 }
@@ -60,13 +60,8 @@ async function transferFunds() {
 
   <!-- Slider -->
   <div class="w-3/4">
-    <q-slide-item
-      @left="transferFunds"
-      @right="router.back()"
-      left-color="green"
-      right-color="red"
-      class="h-12 rounded-full"
-    >
+    <q-slide-item @left="transferFunds" @right="router.back()" left-color="green" right-color="red"
+      class="h-12 rounded-full">
       <template v-slot:left>
         <span class="flex w-full items-center justify-center text-center">
           <CheckIcon class="text-lg" />
@@ -107,10 +102,8 @@ async function transferFunds() {
     </q-card>
   </q-dialog>
 
-  <section
-    class="absolute top-0 flex h-full w-full items-center justify-center bg-slate-300 opacity-70"
-    v-if="isTransactionInProgress"
-  >
+  <section class="absolute top-0 flex h-full w-full items-center justify-center bg-slate-300 opacity-70"
+    v-if="isTransactionInProgress">
     <q-circular-progress indeterminate rounded size="50px" color="black" class="q-ma-md" />
   </section>
 </template>

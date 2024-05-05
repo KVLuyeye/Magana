@@ -16,6 +16,7 @@ import { PrismaModule } from './domains/prisma/prisma.module';
 import { AccountModule } from './domains/account/account.module';
 import { NotificationsService } from './domains/notifications/notifications.service';
 import { EthersModule } from './domains/ethers/ethers.module';
+import { BlockchainListenerService } from './domains/ethers/blockchainListerner.service';
 
 @Module({
   imports: [AuthModule, UserModule, PrismaModule, AccountModule, EthersModule],
@@ -28,6 +29,7 @@ import { EthersModule } from './domains/ethers/ethers.module';
     AuthService,
     PrismaService,
     NotificationsService,
+    BlockchainListenerService,
   ],
 })
 export class AppModule {}

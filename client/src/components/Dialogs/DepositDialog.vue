@@ -1,12 +1,18 @@
-<script setup>
+<script setup lang="ts">
 import MainBtn from '@/components/Buttons/MainBtn.vue';
 import { ref } from 'vue';
 import { useAccountStore } from '@/stores/account';
+
 defineProps({
   buttonName: String,
   show: Boolean,
-  amount: String,
 });
+
+let amount = ref('0.00');
+
+const handleInput = (event: Event) => {
+  amount.value = (event.target as HTMLInputElement).value;
+};
 
 let account = useAccountStore();
 </script>
@@ -18,7 +24,7 @@ let account = useAccountStore();
       <label class="text-sm text-gray-500"> Amount </label> <br />
       <input
         required
-        @input="amount"
+        @input="handleInput"
         step=".01"
         type="text"
         name="amount"
